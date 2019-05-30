@@ -1,2 +1,2 @@
 export { default as Root } from './Root';
-export { default as NavBar } from './NavBar';
+export { default as NavBar } from './navbar/NavBar';

@@ -14,7 +14,7 @@ export default class NavBar extends Component {
             </li>
           </ul>
           <ul id="logo">
-            <li>Lundi</li>
+            <li>I love Ruby</li>
           </ul>
 
           <ul>

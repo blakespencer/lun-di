@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -30,4 +30,36 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+nav {
+  position: fixed;
+  width: 100vw;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-container ul {
+  display: flex;
+  flex-direction: row;
+  align-items: space-around;
+  padding: 0;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+li {
+  list-style-type: none;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+#logo {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

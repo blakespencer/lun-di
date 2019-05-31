@@ -6,8 +6,14 @@ export default class Content extends Component {
   render() {
     return (
       <div id={styles.content}>
-        <img className={styles.picture} src={Background} />
-        <div styles={{ backgroundImage: `url(${Background})` }} />
+        <div
+          className={styles['image-container']}
+          style={{ backgroundImage: `url(${Background})` }}
+        >
+          {/* <img className={styles.picture} src={Background} /> */}
+          <span className={styles['image-text']}>The Summer Collection</span>
+        </div>
+        {/* <div styles={{ backgroundImage: `url(${Background})` }} /> */}
       </div>
     );
   }

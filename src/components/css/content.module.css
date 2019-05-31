@@ -7,9 +7,33 @@
   box-sizing: border-box;
 }
 
-.picture {
-  /* position: absolute; */
+.image-container {
+  max-width: 100%;
+  height: 65vh;
+  background-size: cover;
+  background-position: 50%;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .picture {
   top: 0;
   left: 0;
   max-width: 100%;
+} */
+
+.image-text {
+  font-family: Taviraj, serif;
+  font-size: 2.25em;
+  -webkit-letter-spacing: -0.02em;
+  -moz-letter-spacing: -0.02em;
+  -ms-letter-spacing: -0.02em;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }

@@ -9,13 +9,21 @@
 .nav-ul {
   margin-top: 0;
   margin-bottom: 0;
+  /* padding: 1em; */
   padding-top: 1em;
   padding-bottom: 1em;
+  font-family: Ubuntu, sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  white-space: 0.1em;
 }
 
 .nav-li {
   list-style-type: none;
-  padding: 1em 0.5em 1em 0.5em;
+  padding: 1rem 1rem 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-container {
@@ -27,7 +35,7 @@
   display: flex;
   flex-direction: row;
   align-items: space-around;
-  padding: 0em 0.5em 0em 0.5em;
+  padding: 0em;
 }
 
 /* #right {
@@ -44,6 +52,7 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  font-size: 1.5em;
 }
 
 #user-popup {

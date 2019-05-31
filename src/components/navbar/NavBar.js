@@ -8,7 +8,7 @@ export default class NavBar extends Component {
         <nav>
           <div className={styles['nav-container']}>
             <NavBarLeft />
-            <ul id={styles.logo} className={styles['nav-ul']}>
+            <ul id={styles.logo} className={`${styles['nav-ul']}`}>
               <li className={styles['nav-li']}>LUN-DI</li>
             </ul>
             <NavBarRight />

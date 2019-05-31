@@ -16,6 +16,8 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   white-space: 0.1em;
+  letter-spacing: 0.1em;
+  width: 33%;
 }
 
 .nav-li {
@@ -28,31 +30,24 @@
 
 .nav-container {
   display: flex;
-  justify-content: space-between;
 }
 
 .nav-container ul {
   display: flex;
   flex-direction: row;
-  align-items: space-around;
   padding: 0em;
 }
 
-/* #right {
-  float: right;
-}
-
-#left {
-  float: left;
-} */
-
 #logo {
-  /* flex-grow: 1; */
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   font-size: 1.5em;
+}
+
+#right {
+  justify-content: flex-end;
 }
 
 #user-popup {

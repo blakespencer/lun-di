@@ -1,4 +1,4 @@
-#navbar {
+#header {
   position: fixed;
   width: 100vw;
   background-color: white;
@@ -43,10 +43,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
 }
 
 #user-popup {
-  background-color: red;
+  background-color: white;
   position: absolute;
   top: 100%;
   right: 0;

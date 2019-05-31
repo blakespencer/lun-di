@@ -1,10 +1,13 @@
 import React from 'react';
-import { Root } from './components';
-
+import { NavBar } from './components';
+import Routes from './Routes';
 function App() {
   return (
     <div className="App">
-      <Root />
+      <NavBar />
+      {/* <Content> */}
+      <Routes />
+      {/* </Content> */}
     </div>
   );
 }

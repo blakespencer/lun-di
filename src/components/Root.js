@@ -1,6 +1,11 @@
 import React from 'react';
-import { NavBar } from './';
+import { NavBar, Content } from './';
 
 export default function Root() {
-  return <NavBar />;
+  return (
+    <React.Fragment>
+      <NavBar />
+      <Content />
+    </React.Fragment>
+  );
 }

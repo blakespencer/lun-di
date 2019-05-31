@@ -104,11 +104,12 @@ li {
   background-color: black;
   bottom: 0;
   left: 0;
+  transition: width 0.3s ease 0.3s;
 }
 
 .nav-hover:hover::after {
-  width: 100%;
   transition: width 0.3s ease 0s;
+  width: 100% !important;
 }
 
 #nav-user:hover #user-popup {

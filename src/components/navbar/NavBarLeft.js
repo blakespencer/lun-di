@@ -7,8 +7,8 @@ export default class NavBarLeft extends Component {
       <React.Fragment>
         <MediaQuery query="(min-device-width: 1224px)">
           <ul>
-            <li>Shop</li>
-            <li>New In</li>
+            <li className="nav-hover">Shop</li>
+            <li className="nav-hover">New In</li>
             <li>
               <i class="fas fa-search" />
             </li>

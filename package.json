@@ -1,12 +1,16 @@
 {
-  "name": "ruby",
+  "name": "lun-di",
   "version": "0.1.0",
-  "engines": {
-    "node": "10.15.3"
-  },
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
+    "connect-session-sequelize": "^6.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.1",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
@@ -16,7 +20,9 @@
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sequelize": "^5.8.7",
+    "socket.io": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

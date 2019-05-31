@@ -28,6 +28,11 @@
   align-items: center;
 }
 
+.nav-li-popup {
+  list-style-type: none;
+  white-space: nowrap;
+}
+
 .nav-container {
   display: flex;
 }

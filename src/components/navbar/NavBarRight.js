@@ -26,9 +26,9 @@ export default class NavBarRight extends Component {
                 className={styles['toolbox-user']}
               >
                 <ul className={styles['nav-ul']}>
-                  <li className={styles['nav-li']}>Login</li>
-                  <li className={styles['nav-li']}>My Profile</li>
-                  <li className={styles['nav-li']}>My Orders</li>
+                  <li className={styles['nav-li-popup']}>Login</li>
+                  <li className={styles['nav-li-popup']}>My Profile</li>
+                  <li className={styles['nav-li-popup']}>My Orders</li>
                 </ul>
               </span>
             </li>

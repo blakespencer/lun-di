@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './css/content.module.css';
-import Background from '../images/example_pic.png';
+import Background from '../images/example_pic.jpg';
 
 export default class Content extends Component {
   render() {

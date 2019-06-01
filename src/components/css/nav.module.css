@@ -55,6 +55,28 @@
   justify-content: flex-end;
 }
 
+.popup {
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  visibility: hidden;
+  /* min-width: 80px; */
+}
+
+.popup ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup ul li {
+  padding: 10px 15px 10px 10px;
+}
+
+.nav-popup:hover .popup {
+  visibility: visible;
+}
+
 #user-popup {
   background-color: white;
   position: absolute;
@@ -100,4 +122,9 @@
 
 #nav-user:hover #user-popup {
   visibility: visible;
+}
+
+.toggle-icon {
+  padding-bottom: 0.25em;
+  width: 10px;
 }

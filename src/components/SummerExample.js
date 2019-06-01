@@ -11,7 +11,7 @@ export default class Content extends Component {
           style={{ backgroundImage: `url(${Background})` }}
         >
           {/* <img className={styles.picture} src={Background} /> */}
-          <span className={styles['image-text']}>The Summer Collection</span>
+          <span className={styles['image-text']}>I LOVE RUBY</span>
         </div>
         {/* <div styles={{ backgroundImage: `url(${Background})` }} /> */}
       </div>

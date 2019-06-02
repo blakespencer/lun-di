@@ -1,9 +1,11 @@
 const router = require('express').Router();
+const { Product } = require('../db/models');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    res.json({ message: 'success' });
+    const products = await Product.findAll();
+    res.json(products);
   } catch (err) {
     next(err);
   }

@@ -8,7 +8,7 @@ export default class Popup extends Component {
       <span className={`${styles['popup']} ${styles['toolbox-user']}`}>
         <ul className={styles['nav-ul']}>
           {this.props.options.map(el => (
-            <li className={styles['nav-li-popup']}>
+            <li className={styles['nav-li-popup']} key={el.name}>
               <input
                 type="radio"
                 name={type}

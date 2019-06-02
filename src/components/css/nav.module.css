@@ -6,6 +6,12 @@
   /* padding: 1em 0em 0em 0em; */
 }
 
+.a {
+  color: black;
+  text-decoration: none;
+  display: flex;
+}
+
 .nav-ul {
   margin-top: 0;
   margin-bottom: 0;

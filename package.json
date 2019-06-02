@@ -26,8 +26,8 @@
   },
   "scripts": {
     "starts": "react-scripts start",
-    "start": "node server/db/seed.js && node server/",
-    "heroku-postbuild": "npm run buildcustom",
+    "start": "node server/",
+    "heroku-postbuild": "npm run buildcustom && node server/db/seed.js",
     "buildcustom": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -46,5 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

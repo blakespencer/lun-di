@@ -15,6 +15,8 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin-bottom: 1rem;
   margin-right: 1rem;
+  overflow: scroll;
+  max-height: max-content;
 }
 
 .product-item {
@@ -23,6 +25,10 @@
 
 .menu {
   background-color: rgba(255, 255, 255, 0.8);
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  position: sticky;
+  top: 60px;
 }
 
 .image-container {

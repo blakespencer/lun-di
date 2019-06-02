@@ -11,16 +11,16 @@ export default class BreadCrumb extends Component {
           <NavLink to="/" className={styles['a']}>
             Home
           </NavLink>
-          <i className="fas fa-angle-right" />
+          <i className={`fas fa-angle-right ${styles['icon']}`} />
         </li>
         <li className={styles['li']}>
           <NavLink to="/collections" className={styles['a']}>
             Collections
           </NavLink>
-          <i className="fas fa-angle-right" />
+          <i className={`fas fa-angle-right ${styles['icon']}`} />
         </li>
         <li className={styles['li']}>
-          <NavLink to="/summerexample" className={styles['a']}>
+          <NavLink to="/collections/summerexample" className={styles['a']}>
             New
           </NavLink>
         </li>

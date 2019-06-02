@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import styles from './css/product-grid.module.css';
+import styles from '../css/product-grid.module.css';
 import { connect } from 'react-redux';
-import { ProductProfile } from '.';
+import { ProductProfile, FilterBar } from '..';
 
 class ProductGrid extends Component {
   render() {
@@ -9,10 +9,13 @@ class ProductGrid extends Component {
     return (
       <div className={styles['grid-container']}>
         <div className={styles['menu']}>MENU</div>
-        <div className={styles['grid-items']}>
-          {products.map(el => {
-            return <ProductProfile {...el} />;
-          })}
+        <div>
+          <FilterBar />
+          <div className={styles['grid-items']}>
+            {products.map(el => {
+              return <ProductProfile {...el} />;
+            })}
+          </div>
         </div>
       </div>
     );

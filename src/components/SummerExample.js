@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
 import styles from './css/content.module.css';
-import Background from '../images/example_pic.jpg';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getProducts } from '../store/products';
+import { ProductProfile, ImageTitle, ProductGrid } from './';
 
-export default class Content extends Component {
+class Content extends Component {
   async componentDidMount() {
-    const res = await axios.get(`/api/products`);
-    console.log(res.data);
+    await this.props.getProducts();
   }
 
   render() {
+    const { products } = this.props;
     return (
       <div id={styles.content}>
-        <div
-          className={styles['image-container']}
-          style={{ backgroundImage: `url(${Background})` }}
-        >
-          {/* <img className={styles.picture} src={Background} /> */}
-          <span className={styles['image-text']}>I LOVE RUBY</span>
-        </div>
-        {/* <div styles={{ backgroundImage: `url(${Background})` }} /> */}
+        <ImageTitle text="I Love Ruby" imagePath="../images/example_pic.jpg" />
+        <ProductGrid />
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ products }) => ({
+  products,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getProducts: () => dispatch(getProducts()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Content);

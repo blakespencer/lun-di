@@ -6,14 +6,20 @@ import Popup from './Popup';
 export default class NavBarRight extends Component {
   state = {
     hover: 'none',
+    country: 'UK',
+    currency: 'GBP',
   };
 
   handleHover = type => {
     this.setState({ hover: type });
   };
 
+  handleChange = evt => {
+    this.setState({ [evt.target.name]: evt.target.value });
+  };
+
   render() {
-    const { hover } = this.state;
+    const { hover, country, currency } = this.state;
     return (
       <React.Fragment>
         <MediaQuery query="(min-device-width: 1224px)">
@@ -28,7 +34,7 @@ export default class NavBarRight extends Component {
               onMouseOver={() => this.handleHover('country')}
               onMouseOut={() => this.handleHover('none')}
             >
-              UK
+              {country}{' '}
               {hover === 'country' ? (
                 <span className={styles['toggle-icon']}>-</span>
               ) : (
@@ -36,9 +42,12 @@ export default class NavBarRight extends Component {
               )}
               <Popup
                 options={[
-                  { name: 'UK', value: 'uk' },
-                  { name: 'US', value: 'us' },
+                  { name: 'UNITED KINGDOM', value: 'UK' },
+                  { name: 'UNITED STATES', value: 'US' },
                 ]}
+                handleChange={this.handleChange}
+                checked={country}
+                type="country"
               />
             </li>
             <li
@@ -48,7 +57,7 @@ export default class NavBarRight extends Component {
               onMouseOver={() => this.handleHover('currency')}
               onMouseOut={() => this.handleHover('none')}
             >
-              GBP{' '}
+              {currency}{' '}
               {hover === 'currency' ? (
                 <span className={styles['toggle-icon']}>-</span>
               ) : (
@@ -56,10 +65,13 @@ export default class NavBarRight extends Component {
               )}
               <Popup
                 options={[
-                  { name: '£ (GBP)', value: 'gbp' },
-                  { name: '$ (USD)', value: 'usd' },
-                  { name: '€ (EUR)', value: 'eur' },
+                  { name: '£ (GBP)', value: 'GBP' },
+                  { name: '$ (USD)', value: 'USD' },
+                  { name: '€ (EUR)', value: 'EUR' },
                 ]}
+                handleChange={this.handleChange}
+                checked={currency}
+                type="currency"
               />
             </li>
             <li

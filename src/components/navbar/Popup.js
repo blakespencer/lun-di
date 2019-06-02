@@ -2,17 +2,8 @@ import React, { Component } from 'react';
 import styles from '../css/nav.module.css';
 
 export default class Popup extends Component {
-  state = {
-    selected: 'uk',
-  };
-
-  handleChange = evt => {
-    this.setState({
-      selected: evt.target.name,
-    });
-  };
-
   render() {
+    const { type, checked } = this.props;
     return (
       <span className={`${styles['popup']} ${styles['toolbox-user']}`}>
         <ul className={styles['nav-ul']}>
@@ -20,10 +11,10 @@ export default class Popup extends Component {
             <li className={styles['nav-li-popup']}>
               <input
                 type="radio"
-                name={el.name}
+                name={type}
                 value={el.value}
-                checked={this.state.selected === el.name}
-                onChange={this.handleChange}
+                checked={checked === el.value}
+                onChange={this.props.handleChange}
               />
               {el.name}
             </li>

@@ -15,7 +15,7 @@
 
 .li {
   list-style-type: none;
-  padding: 10px;
+  padding: 10px 10px 10px 0px;
   margin: 0;
   display: flex;
   font-family: Ubuntu, sans-serif;
@@ -39,7 +39,7 @@
 }
 
 .icon {
-  padding: 0px 10px;
+  padding: 0px 0px 0px 10px;
   color: rgba(0, 0, 0, 0.5);
 }
 
@@ -69,6 +69,10 @@
   color: black;
 }
 
+.filter:hover .filter-lable {
+  color: black;
+}
+
 .filter-popup {
   position: absolute;
   background-color: rgba(255, 255, 255, 1);
@@ -89,8 +93,9 @@
   text-transform: uppercase;
   white-space: 0.1em;
   letter-spacing: 0.1em;
-  color: rgba(0, 0, 0, 1);
+  color: rgba(0, 0, 0, 0.5);
   user-select: none;
+  transition: color 0.3s ease-in;
 }
 
 .filter-right {
@@ -103,6 +108,10 @@
 .icon {
   fill: rgba(0, 0, 0, 0.5);
   transition: color 0.3s ease-in;
+}
+
+.select option {
+  padding: 10px;
 }
 
 .select option:hover {

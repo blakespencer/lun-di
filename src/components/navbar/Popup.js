@@ -16,7 +16,7 @@ export default class Popup extends Component {
                 checked={checked === el.value}
                 onChange={this.props.handleChange}
               />
-              {el.name}
+              {'  ' + el.name}
             </li>
           ))}
         </ul>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import styles from '../css/breadcrumb.module.css';
+import styles from '../css/filter-bar.module.css';
 
 class BreadCrumb extends Component {
   render() {

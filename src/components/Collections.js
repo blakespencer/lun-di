@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import styles from './css/content.module.css';
+import { ProductGrid } from '.';
 import { connect } from 'react-redux';
 import { getProducts } from '../store/products';
-import { ImageTitle, ProductGrid } from './';
 
-class Content extends Component {
+class Collections extends Component {
   async componentDidMount() {
     await this.props.getProducts();
   }
-
   render() {
     return (
-      <div id={styles.content}>
-        <ImageTitle text="I Love Ruby" imagePath="../images/example_pic.jpg" />
+      <div id={styles['content']}>
         <ProductGrid />
       </div>
     );
@@ -26,4 +24,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(Content);
+)(Collections);

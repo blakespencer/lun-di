@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../css/breadcrumb.module.css';
+import styles from '../css/filter-bar.module.css';
 
 export default class FilterBox extends Component {
   container = React.createRef();

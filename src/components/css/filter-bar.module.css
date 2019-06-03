@@ -63,6 +63,7 @@
   justify-content: space-between;
   align-items: center;
   width: 190px;
+  padding: 0px 2rem 0px 0px;
 }
 
 .filter:hover .icon {
@@ -95,7 +96,7 @@
   letter-spacing: 0.1em;
   color: rgba(0, 0, 0, 0.5);
   user-select: none;
-  transition: color 0.3s ease-in;
+  transition: color 0.2s ease-in;
 }
 
 .filter-right {
@@ -107,7 +108,7 @@
 
 .icon {
   fill: rgba(0, 0, 0, 0.5);
-  transition: color 0.3s ease-in;
+  transition: color 0.2s ease-in;
 }
 
 .select option {
@@ -115,15 +116,15 @@
 }
 
 .select option:hover {
-  background-color: rgba(0, 0, 255, 0.2);
+  background-color: rgba(255, 192, 203, 0.2);
 }
 
 .selected {
-  background-color: rgba(0, 0, 255, 0.5);
+  background-color: rgba(255, 192, 203, 0.5);
   color: white;
 }
 
 .select option.selected:hover {
-  background-color: rgba(0, 0, 255, 0.5);
+  background-color: rgba(255, 192, 203, 0.5);
   color: white;
 }

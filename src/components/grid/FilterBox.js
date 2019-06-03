@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from '../css/breadcrumb.module.css';
 
 export default class FilterBox extends Component {
+  container = React.createRef();
   state = {
     isClicked: false,
     selected: { value: 'filterBy', name: 'Filter By' },
@@ -12,6 +13,25 @@ export default class FilterBox extends Component {
       { value: 'priceAscending', name: 'Price (ascending)' },
       { value: 'priceDescending', name: 'Price (descending)' },
     ],
+  };
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleClickOutside = evt => {
+    console.log(evt.target);
+    if (
+      this.container.current &&
+      !this.container.current.contains(evt.target)
+    ) {
+      this.setState({
+        isClicked: false,
+      });
+    }
   };
 
   handleClick = evt => {
@@ -26,7 +46,6 @@ export default class FilterBox extends Component {
     });
   };
 
-  // 13 charaters
   render() {
     const { isClicked, selected, options } = this.state;
     let selectedShort = selected.name;
@@ -34,7 +53,11 @@ export default class FilterBox extends Component {
       selectedShort = selected.name.slice(0, 14) + '...';
     }
     return (
-      <div className={styles['filter']} onClick={this.handleClick}>
+      <div
+        className={styles['filter']}
+        onClick={this.handleClick}
+        ref={this.container}
+      >
         <div className={styles['filter-lable']} id={selected.value}>
           {selectedShort}
         </div>

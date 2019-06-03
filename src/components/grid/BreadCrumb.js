@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import styles from '../css/breadcrumb.module.css';
 
-export default class BreadCrumb extends Component {
+class BreadCrumb extends Component {
   render() {
-    console.log(this.props);
+    const arr = this.props.match.path.split('/');
+    arr.shift();
     return (
       <ul className={styles['ul']}>
         <li className={styles['li']}>
@@ -13,18 +14,34 @@ export default class BreadCrumb extends Component {
           </NavLink>
           <i className={`fas fa-angle-right ${styles['icon']}`} />
         </li>
-        <li className={styles['li']}>
-          <NavLink to="/collections" className={styles['a']}>
-            Collections
-          </NavLink>
-          <i className={`fas fa-angle-right ${styles['icon']}`} />
-        </li>
-        <li className={styles['li']}>
-          <NavLink to="/collections/summerexample" className={styles['a']}>
-            New
-          </NavLink>
-        </li>
+        {arr.map((el, idx) => {
+          const linkName = el.replace('-', ' ');
+          if (idx === arr.length - 1) {
+            return (
+              <li className={styles['li']} key={el}>
+                <NavLink
+                  to={`/${arr.join('/')}`}
+                  className={styles['a']}
+                  id={styles['last-a']}
+                >
+                  {linkName}
+                </NavLink>
+              </li>
+            );
+          }
+          const path = arr.slice(0, idx + 1).join('/');
+          return (
+            <li className={styles['li']} key={el}>
+              <NavLink to={`/${path}`} className={styles['a']}>
+                {linkName}
+              </NavLink>
+              <i className={`fas fa-angle-right ${styles['icon']}`} />
+            </li>
+          );
+        })}
       </ul>
     );
   }
 }
+
+export default withRouter(BreadCrumb);

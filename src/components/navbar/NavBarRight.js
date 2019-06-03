@@ -93,11 +93,11 @@ export default class NavBarRight extends Component {
           </ul>
         </MediaQuery>
         <MediaQuery maxDeviceWidth={1224}>
-          <ul className={styles['nav-ul']}>
-            <li>
+          <ul className={styles['nav-ul']} id={styles.right}>
+            <li className={styles['nav-li-popup']}>
               <i className="far fa-user" />
             </li>
-            <li>
+            <li className={styles['nav-li-popup']}>
               <i className="fas fa-shopping-cart" />
             </li>
           </ul>

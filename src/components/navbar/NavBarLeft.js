@@ -7,9 +7,9 @@ export default class NavBarLeft extends Component {
   render() {
     return (
       <React.Fragment>
-        <MediaQuery query="(min-device-width: 1224px)">
+        <MediaQuery minDeviceWidth={1224}>
           <ul className={styles['nav-ul']} id={styles.left}>
-            <Link to={'/collections/summerexample'} className={styles['a']}>
+            <Link to={'/collections/summer-example'} className={styles['a']}>
               <li className={`${styles['nav-li']} ${styles['nav-hover']}`}>
                 Shop
               </li>

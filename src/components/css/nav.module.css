@@ -157,6 +157,12 @@
   box-shadow: none;
 }
 
+@media (max-width: 767px) {
+  #logo {
+    font-size: calc(1.5vh * 1.5vw);
+  }
+}
+
 /* .nav-li-popup input[type='radio']:checked::after {
   width: 5px;
   height: 5px;

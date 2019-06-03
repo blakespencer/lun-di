@@ -26,12 +26,12 @@
 
 @media (max-width: 767px) {
   .grid-container {
-    grid-template-columns: 2fr;
+    grid-template-columns: 1fr;
     gap: 1rem 1rem;
     margin: 1em;
   }
   .grid-items {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.5fr 0.5fr;
     margin: 0;
   }
 }

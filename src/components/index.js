@@ -6,4 +6,5 @@ export { default as ProductGrid } from './grid/ProductGrid';
 export { default as FilterBar } from './grid/FilterBar';
 export { default as BreadCrumb } from './grid/BreadCrumb';
 export { default as FilterBox } from './grid/FilterBox';
+export { default as Menu } from './grid/Menu';
 export { default as Collections } from './Collections';

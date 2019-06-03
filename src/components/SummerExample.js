@@ -10,6 +10,7 @@ class Content extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div id={styles.content}>
         <ImageTitle text="I Love Ruby" imagePath="../images/example_pic.jpg" />

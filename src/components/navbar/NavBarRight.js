@@ -22,7 +22,24 @@ export default class NavBarRight extends Component {
     const { hover, country, currency } = this.state;
     return (
       <React.Fragment>
-        <MediaQuery query="(min-device-width: 1224px)">
+        <MediaQuery maxWidth={1025}>
+          <ul className={styles['nav-ul']} id={styles.right}>
+            <li className={`${styles['nav-li']}`} id={styles['nav-user']}>
+              <i className="far fa-user" />
+              <span id={styles['user-popup']}>
+                <ul className={styles['nav-ul']}>
+                  <li className={styles['nav-li-popup']}>Login</li>
+                  <li className={styles['nav-li-popup']}>My Profile</li>
+                  <li className={styles['nav-li-popup']}>My Orders</li>
+                </ul>
+              </span>
+            </li>
+            <li className={styles['nav-li']}>
+              <i className="fas fa-shopping-cart" />
+            </li>
+          </ul>
+        </MediaQuery>
+        <MediaQuery minWidth={1026}>
           <ul className={styles['nav-ul']} id={styles.right}>
             <li className={`${styles['nav-li']} ${styles['nav-hover']}`}>
               About
@@ -88,16 +105,6 @@ export default class NavBarRight extends Component {
               </span>
             </li>
             <li className={styles['nav-li']}>
-              <i className="fas fa-shopping-cart" />
-            </li>
-          </ul>
-        </MediaQuery>
-        <MediaQuery maxDeviceWidth={1224}>
-          <ul className={styles['nav-ul']} id={styles.right}>
-            <li className={styles['nav-li-popup']}>
-              <i className="far fa-user" />
-            </li>
-            <li className={styles['nav-li-popup']}>
               <i className="fas fa-shopping-cart" />
             </li>
           </ul>

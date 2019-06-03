@@ -7,7 +7,7 @@ export default class NavBarLeft extends Component {
   render() {
     return (
       <React.Fragment>
-        <MediaQuery minDeviceWidth={1224}>
+        <MediaQuery minWidth={1025}>
           <ul className={styles['nav-ul']} id={styles.left}>
             <Link to={'/collections/summer-example'} className={styles['a']}>
               <li className={`${styles['nav-li']} ${styles['nav-hover']}`}>
@@ -22,7 +22,7 @@ export default class NavBarLeft extends Component {
             </li>
           </ul>
         </MediaQuery>
-        <MediaQuery maxDeviceWidth={1224}>
+        <MediaQuery maxWidth={1025}>
           <ul className={styles['nav-ul']}>
             <li className={styles['nav-li']}>Drop Down</li>
             <li className={styles['nav-li']}>

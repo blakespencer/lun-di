@@ -34,3 +34,9 @@
   margin-top: 0;
   margin-bottom: 1rem;
 }
+
+@media (max-width: 767px) {
+  .image-container {
+    margin-bottom: 1rem;
+  }
+}

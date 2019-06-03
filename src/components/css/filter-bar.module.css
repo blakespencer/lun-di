@@ -41,6 +41,8 @@
 .icon {
   padding: 0px 0px 0px 10px;
   color: rgba(0, 0, 0, 0.5);
+  fill: rgba(0, 0, 0, 0.5);
+  transition: color 0.2s ease-in;
 }
 
 #last-a {
@@ -106,11 +108,6 @@
   align-items: center;
 }
 
-.icon {
-  fill: rgba(0, 0, 0, 0.5);
-  transition: color 0.2s ease-in;
-}
-
 .select option {
   padding: 10px;
 }
@@ -132,11 +129,11 @@
 @media (max-width: 767px) {
   .li {
     list-style-type: none;
-    padding: 10px 10px 10px 0px;
+    padding: 2vw 2vw 2vw 0px;
     margin: 0;
     display: flex;
     font-family: Ubuntu, sans-serif;
-    font-size: 0.1rem;
+    font-size: 1.7vw;
     text-transform: uppercase;
     white-space: 0.1rem;
     letter-spacing: 0.1rem;
@@ -144,25 +141,16 @@
   }
 
   .filter {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-    justify-content: space-between;
-    align-items: center;
     width: auto;
-    padding: 0px 1rem 0px 0px;
+    padding: 0;
   }
 
   .filter-lable {
     padding: 2px 8px;
-    font-family: Ubuntu, sans-serif;
-    font-size: 0.1rem;
-    text-transform: uppercase;
-    white-space: 0.1em;
-    letter-spacing: 0.1em;
-    color: rgba(0, 0, 0, 0.5);
-    user-select: none;
-    transition: color 0.2s ease-in;
+    font-size: 1.7vw;
+  }
+
+  .icon {
+    padding: 0px 0px 0px 2vw;
   }
 }

@@ -159,7 +159,7 @@
 
 @media (max-width: 767px) {
   #logo {
-    font-size: calc(1.5vh * 1.5vw);
+    font-size: 1em;
   }
 }
 

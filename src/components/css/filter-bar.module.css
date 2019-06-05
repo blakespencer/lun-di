@@ -64,7 +64,7 @@
   position: relative;
   justify-content: space-between;
   align-items: center;
-  width: 190px;
+  width: 182px;
   padding: 0px 2rem 0px 0px;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .filter-lable {
-  padding: 2px 8px;
+  padding: 0px 0px 0px 2px;
   font-family: Ubuntu, sans-serif;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -104,9 +104,9 @@
 .filter-right {
   display: flex;
   height: 100%;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  width: 10vh;
+  width: 5vh;
 }
 
 .select option {
@@ -142,9 +142,10 @@
   }
 
   .filter {
-    width: 17vh;
+    width: auto;
     padding: 0;
     justify-content: flex-end;
+    cursor: pointer;
   }
 
   .filter-bar {
@@ -155,6 +156,7 @@
     padding: 0;
     justify-content: flex-end;
     font-size: 2vw;
+    white-space: nowrap;
   }
 
   .filter-right {
@@ -165,5 +167,13 @@
 
   .icon {
     padding: 0px 0px 0px 2vw;
+  }
+
+  .filter-popup {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 1);
+    top: 100%;
+    z-index: 1;
+    width: auto;
   }
 }

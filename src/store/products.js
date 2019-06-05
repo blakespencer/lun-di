@@ -13,9 +13,10 @@ const defaultProducts = [];
 const gotProducts = payload => ({ type: GET_PRODUCTS, payload });
 
 // THUNK CREATORS
-export const getProducts = () => async dispatch => {
+export const getProducts = (catagory, productType) => async dispatch => {
   try {
-    const res = await axios.get('/api/products');
+    console.log('url: ', `/api/catagories/productType/${productType}`);
+    const res = await axios.get(`/api/catagories/productType/${productType}`);
     dispatch(gotProducts(res.data || defaultProducts));
   } catch (err) {
     console.error(err);

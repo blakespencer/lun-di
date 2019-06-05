@@ -1,7 +1,11 @@
 const router = require('express').Router();
 module.exports = router;
 
+router.use('/catagories', require('./catagories'));
+
 router.use('/products', require('./products'));
+
+router.use('/productTypes', require('./productType'));
 
 router.use('/users', require('./users'));
 

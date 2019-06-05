@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import { Login, Signup, UserHome } from './components';
-import { SummerExample, Collections } from './components';
+import { ProductsView, Collections } from './components';
 import { me } from './store';
+// import { getProductTypes } from './store/productTypes';
+import { getCatagories } from './store/catagories';
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -21,7 +20,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         {/* <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} /> */}
-        <Route path="/collections/summer-example" component={SummerExample} />
+        <Route path="/shop/:catagory/:productType" component={ProductsView} />
         <Route exact path="/collections" component={Collections} />
         {isLoggedIn && (
           <Switch>
@@ -51,6 +50,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me());
+      dispatch(getCatagories());
     },
   };
 };

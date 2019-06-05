@@ -4,8 +4,7 @@ import styles from '../css/filter-bar.module.css';
 
 class BreadCrumb extends Component {
   render() {
-    const arr = this.props.match.path.split('/');
-    arr.shift();
+    const urlParams = Object.values(this.props.match.params);
     return (
       <ul className={styles['ul']}>
         <li className={styles['li']}>
@@ -14,13 +13,13 @@ class BreadCrumb extends Component {
           </NavLink>
           <i className={`fas fa-angle-right ${styles['icon']}`} />
         </li>
-        {arr.map((el, idx) => {
+        {urlParams.map((el, idx) => {
           const linkName = el.replace('-', ' ');
-          if (idx === arr.length - 1) {
+          if (idx === urlParams.length - 1) {
             return (
               <li className={styles['li']} key={el}>
                 <NavLink
-                  to={`/${arr.join('/')}`}
+                  to={`/shop/${urlParams.join('/')}`}
                   className={styles['a']}
                   id={styles['last-a']}
                 >
@@ -29,10 +28,10 @@ class BreadCrumb extends Component {
               </li>
             );
           }
-          const path = arr.slice(0, idx + 1).join('/');
+          const path = urlParams.slice(0, idx + 1).join('/');
           return (
             <li className={styles['li']} key={el}>
-              <NavLink to={`/${path}`} className={styles['a']}>
+              <NavLink to={`/shop/${path}`} className={styles['a']}>
                 {linkName}
               </NavLink>
               <i className={`fas fa-angle-right ${styles['icon']}`} />

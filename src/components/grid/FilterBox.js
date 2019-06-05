@@ -23,7 +23,6 @@ export default class FilterBox extends Component {
   }
 
   handleClickOutside = evt => {
-    console.log(evt.target);
     if (
       this.container.current &&
       !this.container.current.contains(evt.target)

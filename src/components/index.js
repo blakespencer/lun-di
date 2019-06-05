@@ -1,10 +1,12 @@
 export { default as NavBar } from './navbar/NavBar';
-export { default as SummerExample } from './SummerExample';
+export { default as ProductsView } from './ProductsView';
 export { default as ProductProfile } from './grid/ProductProfile';
 export { default as ImageTitle } from './ImageTitle';
 export { default as ProductGrid } from './grid/ProductGrid';
 export { default as FilterBar } from './grid/FilterBar';
 export { default as BreadCrumb } from './grid/BreadCrumb';
 export { default as FilterBox } from './grid/FilterBox';
-export { default as Menu } from './grid/Menu';
 export { default as Collections } from './Collections';
+export { default as LeftNav } from './grid/leftNav/LeftNav';
+export { default as Catagory } from './grid/leftNav/Catagory';
+export { default as QuickAddBar } from './grid/QuickAddBar';

@@ -7,4 +7,30 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 3rem;
+  font-family: Ubuntu, sans-serif;
+}
+
+.quick-add-bar {
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+}
+
+.image-container:hover .quick-add-bar {
+  visibility: visible;
+}
+
+.quick-add-bar:hover .quick-add-text {
+  background-color: black;
+  color: pink;
+}
+
+.quick-add-text {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  white-space: 0.1em;
+  letter-spacing: 0.1em;
+  padding: 1em;
+  text-align: center;
+  color: white;
+  line-height: 26px;
 }

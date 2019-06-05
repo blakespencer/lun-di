@@ -1,0 +1,50 @@
+.menu {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  position: sticky;
+  top: 60px;
+  margin-top: calc(40px + 0.75rem);
+  padding: 1em;
+}
+
+.catagory-container {
+  position: relative;
+}
+
+.catagory {
+  font-family: Ubuntu, sans-serif;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  white-space: 0.1em;
+  letter-spacing: 0.1em;
+  background-color: white;
+  z-index: 1;
+  line-height: 1.5em;
+}
+
+.productType-container {
+  position: relative;
+  left: 10px;
+  /* height: 0px; */
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(255, 255, 255);
+
+  transition: max-height 0.5s ease-in;
+
+  /* padding: 1em 0em; */
+}
+/*
+.catagory:hover + .productType-container {
+  height: auto;
+  transition: height 1s ease-in 0s;
+} */
+
+.visible {
+  max-height: 1000px;
+}
+
+.hidden {
+  max-height: 0px;
+}

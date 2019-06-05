@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from '../css/product-grid.module.css';
 import { connect } from 'react-redux';
-import { ProductProfile, FilterBar, Menu } from '..';
+import { ProductProfile, FilterBar, LeftNav } from '..';
 import MediaQuery from 'react-responsive';
 
 class ProductGrid extends Component {
@@ -10,7 +10,7 @@ class ProductGrid extends Component {
     return (
       <div className={styles['grid-container']}>
         <MediaQuery minWidth={768}>
-          <Menu />
+          <LeftNav />
         </MediaQuery>
         <div>
           <FilterBar />

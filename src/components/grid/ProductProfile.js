@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
-import styles from '../css/product-grid.module.css';
+import styles from '../css/productProfile.module.css';
 import Background from '../../images/example_pic.jpg';
-import { QuickAddBar } from '..';
+import { ImageHover } from '..';
+import { NavLink } from 'react-router-dom';
 
 export default class ProductProfile extends Component {
+  state = { isMouseOver: false };
+  // handleMouse = () => {
+  //   const { isMouseOver } = this.state;
+  //   console.log('outside', isMouseOver);
+  //   this.setState({ isMouseOver: !isMouseOver });
+  // };
   render() {
+    const { isMouseOver } = this.state;
     const { name, description } = this.props;
     return (
-      <div className={styles['product-item']}>
+      <NavLink>
         <div
-          className={styles['image-container']}
-          style={{
-            backgroundImage: `url(${require('../../images/product_image.jpg')})`,
-          }}
+          className={styles['product-item']}
+          // onMouseOver={this.handleMouse}
+          // onMouseOut={this.handleMouse}
         >
-          <QuickAddBar />
+          <ImageHover
+            name={name}
+            //  isMouseOver={isMouseOver}
+          />
+          <div>{name}</div>
+          <div>{description}</div>
         </div>
-        <div>{name}</div>
-        <div>{description}</div>
-      </div>
+      </NavLink>
     );
   }
 }

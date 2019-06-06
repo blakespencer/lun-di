@@ -14,9 +14,11 @@ export default class NavBarLeft extends Component {
                 Shop
               </li>
             </Link>
-            <li className={`${styles['nav-li']} ${styles['nav-hover']}`}>
-              New In
-            </li>
+            <Link to={'/shop/collection/new-in'} className={styles['a']}>
+              <li className={`${styles['nav-li']} ${styles['nav-hover']}`}>
+                New In
+              </li>
+            </Link>
             <li className={styles['nav-li']}>
               <i className="fas fa-search" />
             </li>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from '../../css/left-nav.module.css';
 import { connect } from 'react-redux';
 import { Catagory } from '../../';
+import { withRouter } from 'react-router-dom';
 
 class Menu extends Component {
   state = { clicked: 'null' };
@@ -18,6 +19,7 @@ class Menu extends Component {
   render() {
     const { catagories } = this.props;
     const { clicked } = this.state;
+    const { catagory } = this.props.match.params;
     return (
       <div className={styles['menu']}>
         {catagories.map(el => {
@@ -27,6 +29,7 @@ class Menu extends Component {
               {...el}
               clicked={clicked}
               handleClick={this.handleClick}
+              bold={catagory === el.name}
             />
           );
         })}
@@ -39,7 +42,9 @@ const mapStateToProps = ({ catagories }) => ({
   catagories,
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(Menu);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(Menu)
+);

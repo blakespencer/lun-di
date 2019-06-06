@@ -1,28 +1,55 @@
+.product-item {
+  background-color: rgb(239, 238, 233);
+  position: relative;
+}
+
 .image-container {
-  height: 65vh;
+  padding-top: 100%;
   background-size: cover;
   text-align: center;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 3rem;
   font-family: Ubuntu, sans-serif;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .quick-add-bar {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(194, 193, 193, 0.5);
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  visibility: visible;
+  color: black;
+}
+
+.quick-add-bar-alt {
+  background-color: rgba(255, 192, 203, 0.9);
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  color: white;
+  opacity: 0;
+}
+
+.product-item:hover .quick-add-bar-container {
+  display: block;
+}
+
+.quick-add-bar-container {
+  display: none;
+}
+
+.quick-add-bar-container:hover .quick-add-bar-alt {
+  opacity: 1;
+}
+
+.quick-add-bar-container:hover .quick-add-bar {
   visibility: hidden;
 }
 
-.image-container:hover .quick-add-bar {
-  visibility: visible;
-}
-
-.quick-add-bar:hover .quick-add-text {
-  background-color: black;
-  color: pink;
-}
+/* .quick-add-bar-alt:hover {
+  opacity: 1;
+} */
 
 .quick-add-text {
   font-size: 0.75rem;
@@ -31,6 +58,5 @@
   letter-spacing: 0.1em;
   padding: 1em;
   text-align: center;
-  color: white;
   line-height: 26px;
 }

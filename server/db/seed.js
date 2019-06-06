@@ -5,7 +5,7 @@ const { Product, ProductType, Catagory } = require('./models');
 // Rows for tables
 const products = [];
 
-for (let i = 0; i < 1200; i++) {
+for (let i = 0; i < 1600; i++) {
   products.push({
     name: 'Shoes 1',
     description: 'These are really nice shoes',
@@ -13,7 +13,7 @@ for (let i = 0; i < 1200; i++) {
   });
 }
 
-const third = 400;
+const fourth = 400;
 
 const productTypesLifeStyle = [
   { name: 'boots' },
@@ -41,10 +41,16 @@ const productTypesClothing = [
   { name: 'trousers' },
 ];
 
+const productTypesColection = [
+  { name: 'new-in' },
+  { name: 'summer-collection' },
+];
+
 const catagories = [
   { name: 'lifestyle' },
   { name: 'footwear' },
   { name: 'clothing' },
+  { name: 'collection' },
 ];
 
 // seedScript function
@@ -75,6 +81,13 @@ const seedScript = async () => {
 
     const createdProductTypesClothing = await ProductType.bulkCreate(
       productTypesClothing,
+      {
+        returning: true,
+      }
+    );
+
+    const createdProductTypesCollection = await ProductType.bulkCreate(
+      productTypesColection,
       {
         returning: true,
       }
@@ -116,22 +129,34 @@ const seedScript = async () => {
       [createdCatagories[2]],
       'setCatagory'
     );
+
+    await createAssociations(
+      createdProductTypesCollection,
+      [createdCatagories[3]],
+      'setCatagory'
+    );
     // prodcutTypes and products
     await createAssociations(
-      createdProducts.slice(0, third),
+      createdProducts.slice(0, fourth),
       createdProductTypesLifeStyle,
       'setProductType'
     );
 
     await createAssociations(
-      createdProducts.slice(third, third * 2),
+      createdProducts.slice(fourth, fourth * 2),
       createdProductTypesFootware,
       'setProductType'
     );
 
     await createAssociations(
-      createdProducts.slice(third * 2, createdProducts.length),
+      createdProducts.slice(fourth * 2, fourth * 3),
       createdProductTypesClothing,
+      'setProductType'
+    );
+
+    await createAssociations(
+      createdProducts.slice(fourth * 3, createdProducts.length),
+      createdProductTypesCollection,
       'setProductType'
     );
 

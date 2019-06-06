@@ -14,7 +14,7 @@ class BreadCrumb extends Component {
           <i className={`fas fa-angle-right ${styles['icon']}`} />
         </li>
         {urlParams.map((el, idx) => {
-          const linkName = el.replace('-', ' ');
+          const linkName = el.replace(/-/g, ' ');
           if (idx === urlParams.length - 1) {
             return (
               <li className={styles['li']} key={el}>

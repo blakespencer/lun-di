@@ -9,4 +9,4 @@ export { default as FilterBox } from './grid/FilterBox';
 export { default as Collections } from './Collections';
 export { default as LeftNav } from './grid/leftNav/LeftNav';
 export { default as Catagory } from './grid/leftNav/Catagory';
-export { default as QuickAddBar } from './grid/QuickAddBar';
+export { default as ImageHover } from './grid/ImageHover';

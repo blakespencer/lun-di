@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styles from '../../css/left-nav.module.css';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class Catagory extends Component {
   render() {
-    const { name, productTypes, clicked, handleClick } = this.props;
+    const { name, productTypes, clicked, handleClick, bold } = this.props;
     return (
       <div className={styles['category-container']}>
         <div className={styles['catagory']} id={name} onClick={handleClick}>
@@ -16,9 +16,15 @@ class Catagory extends Component {
           }`}
         >
           {productTypes.map(el => {
+            const productTypeName = el.name.replace(/-/g, ' ');
             return (
               <div className={styles['productType']} key={el.id}>
-                {el.name}
+                <NavLink
+                  to={`/shop/${name}/${el.name}`}
+                  className={`${styles['a']} ${bold && 'bold'}`}
+                >
+                  {productTypeName}
+                </NavLink>
               </div>
             );
           })}
@@ -28,4 +34,4 @@ class Catagory extends Component {
   }
 }
 
-export default withRouter(Catagory);
+export default Catagory;

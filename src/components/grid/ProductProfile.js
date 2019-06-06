@@ -5,29 +5,17 @@ import { ImageHover } from '..';
 import { NavLink } from 'react-router-dom';
 
 export default class ProductProfile extends Component {
-  state = { isMouseOver: false };
-  // handleMouse = () => {
-  //   const { isMouseOver } = this.state;
-  //   console.log('outside', isMouseOver);
-  //   this.setState({ isMouseOver: !isMouseOver });
-  // };
   render() {
-    const { isMouseOver } = this.state;
-    const { name, description } = this.props;
+    const { name, brand, price } = this.props;
+    const brandName = brand.name.replace(/-/g, ' ');
     return (
       <NavLink to="/" className={styles['a']}>
-        <div
-          className={styles['product-item']}
-          // onMouseOver={this.handleMouse}
-          // onMouseOut={this.handleMouse}
-        >
-          <ImageHover
-            name={name}
-            //  isMouseOver={isMouseOver}
-          />
+        <div className={styles['product-item']}>
+          <ImageHover name={name} />
           <div className={styles['text']}>
+            <div className={styles['text-brand']}>{brandName}</div>
             <div>{name}</div>
-            <div>{description}</div>
+            <div>{`$${price}`}</div>
           </div>
         </div>
       </NavLink>

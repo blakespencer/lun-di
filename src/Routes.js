@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import { Login, Signup, UserHome } from './components';
-import { ProductsView, Collections } from './components';
+import { ProductsView, Login } from './components';
 import { me } from './store';
 // import { getProductTypes } from './store/productTypes';
 import { getCatagories } from './store/catagories';
+import styles from './components/css/nav.module.css';
 
 class Routes extends Component {
   componentDidMount() {
@@ -21,7 +22,7 @@ class Routes extends Component {
         {/* <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} /> */}
         <Route path="/shop/:catagory/:productType" component={ProductsView} />
-        <Route exact path="/collections" component={Collections} />
+        <Route path="/login" component={Login} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

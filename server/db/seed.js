@@ -1,19 +1,30 @@
 const db = require('./index');
 
-const { Product, ProductType, Catagory } = require('./models');
+const { Product, ProductType, Catagory, Brand } = require('./models');
 
 // Rows for tables
 const products = [];
 
 for (let i = 0; i < 1600; i++) {
   products.push({
-    name: 'Shoes 1',
+    name: `Shoes ${i}`,
     description: 'These are really nice shoes',
     picture: './images/example_pic.jpg',
+    price: Math.floor(Math.random() * 100 + 1),
   });
 }
 
 const fourth = 400;
+
+const brands = [
+  { name: 'Louis-V' },
+  { name: 'ASOS' },
+  { name: 'Chicken' },
+  { name: 'Ruby' },
+  { name: 'Blake' },
+  { name: 'HELLO' },
+  { name: "I'M-A-BRAND" },
+];
 
 const productTypesLifeStyle = [
   { name: 'boots' },
@@ -61,6 +72,11 @@ const seedScript = async () => {
     await db.sync({ force: true });
     console.log('db synced');
     // Creating the rows
+
+    const createdBrands = await Brand.bulkCreate(brands, {
+      returning: true,
+    });
+
     const createdProducts = await Product.bulkCreate(products, {
       returning: true,
     });
@@ -112,6 +128,8 @@ const seedScript = async () => {
     };
 
     // catagories and prodcutTypes
+    await createAssociations(createdProducts, createdBrands, 'setBrand');
+
     await createAssociations(
       createdProductTypesLifeStyle,
       [createdCatagories[0]],

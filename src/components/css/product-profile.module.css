@@ -69,8 +69,19 @@
 }
 
 .text {
-  padding: 0.5em;
+  font-family: Taviraj, serif;
+  font-size: 18px;
   letter-spacing: -0.018rem;
   line-height: 1.4;
-  font-family: Taviraj, serif;
+  white-space: normal;
+  padding: 0.5em;
+}
+
+.text-brand {
+  font-family: Ubuntu, sans-serif;
+  font-weight: 400;
+  font-size: 0.625em;
+  color: rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
 }

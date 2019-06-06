@@ -1,10 +1,8 @@
-#header {
+.header {
   position: fixed;
   width: 100vw;
-  background-color: rgba(255, 255, 255, 0.95);
   z-index: 10;
   top: 0;
-  /* padding: 1em 0em 0em 0em; */
 }
 
 .a {

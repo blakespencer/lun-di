@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, ProductType, Catagory } = require('../db/models');
+const { Product, ProductType, Catagory, Brand } = require('../db/models');
 module.exports = router;
 
 router.get('/:ProductTypeName', async (req, res, next) => {
@@ -16,6 +16,10 @@ router.get('/:ProductTypeName', async (req, res, next) => {
           model: ProductType,
           attributes: ['name', 'id'],
           include: [{ model: Catagory, attributes: ['name', 'id'] }],
+        },
+        {
+          model: Brand,
+          attributes: ['name', 'id'],
         },
       ],
     });

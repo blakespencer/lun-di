@@ -85,3 +85,8 @@
   letter-spacing: 0.17em;
   text-transform: uppercase;
 }
+
+.text-info {
+  font-size: 1.2em;
+  font-weight: 500;
+}

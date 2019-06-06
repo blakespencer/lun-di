@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 class Menu extends Component {
   state = { clicked: 'null' };
 
-  handleClick = evt => {
+  handleClick = async evt => {
     const catagory = evt.target.id;
     if (this.state.clicked === catagory) {
       this.setState({ clicked: null });

@@ -3,8 +3,15 @@ import styles from '../css/product-grid.module.css';
 import { connect } from 'react-redux';
 import { ProductProfile, FilterBar, LeftNav } from '..';
 import MediaQuery from 'react-responsive';
+import { withRouter } from 'react-router-dom';
+import { getProducts } from '../../store/products';
 
 class ProductGrid extends Component {
+  async componentDidMount() {
+    const { catagory, productType } = this.props.match.params;
+    await this.props.getProducts(catagory, productType);
+  }
+
   render() {
     const { products } = this.props;
     return (
@@ -29,4 +36,14 @@ const mapStateToProps = ({ products }) => ({
   products,
 });
 
-export default connect(mapStateToProps)(ProductGrid);
+const mapDispatchToProps = dispatch => ({
+  getProducts: (catagory, productType) =>
+    dispatch(getProducts(catagory, productType)),
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ProductGrid)
+);

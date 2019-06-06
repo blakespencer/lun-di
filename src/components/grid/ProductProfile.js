@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from '../css/product-profile.module.css';
-import Background from '../../images/example_pic.jpg';
 import { ImageHover } from '..';
 import { NavLink } from 'react-router-dom';
 
@@ -14,8 +13,8 @@ export default class ProductProfile extends Component {
           <ImageHover name={name} />
           <div className={styles['text']}>
             <div className={styles['text-brand']}>{brandName}</div>
-            <div>{name}</div>
-            <div>{`$${price}`}</div>
+            <div className={styles['text-info']}>{name}</div>
+            <div className={styles['text-info']}>{`$${price}`}</div>
           </div>
         </div>
       </NavLink>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../css/productProfile.module.css';
+import styles from '../css/product-profile.module.css';
 import Background from '../../images/example_pic.jpg';
 import { ImageHover } from '..';
 import { NavLink } from 'react-router-dom';
@@ -15,7 +15,7 @@ export default class ProductProfile extends Component {
     const { isMouseOver } = this.state;
     const { name, description } = this.props;
     return (
-      <NavLink>
+      <NavLink to="/" className={styles['a']}>
         <div
           className={styles['product-item']}
           // onMouseOver={this.handleMouse}
@@ -25,8 +25,10 @@ export default class ProductProfile extends Component {
             name={name}
             //  isMouseOver={isMouseOver}
           />
-          <div>{name}</div>
-          <div>{description}</div>
+          <div className={styles['text']}>
+            <div>{name}</div>
+            <div>{description}</div>
+          </div>
         </div>
       </NavLink>
     );

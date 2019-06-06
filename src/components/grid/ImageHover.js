@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../css/productProfile.module.css';
+import styles from '../css/product-profile.module.css';
 
 export default class ImageHover extends Component {
   // state = {
@@ -19,9 +19,7 @@ export default class ImageHover extends Component {
   // };
 
   handleClick = evt => {
-    // evt.nativeEvent.stopImmediatePropagation();
-    evt.stopPropagation();
-    console.log('hello');
+    evt.preventDefault();
   };
 
   render() {

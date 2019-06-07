@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import styles from '../css/nav.module.css';
 import Popup from './Popup';
+import { NavLink } from 'react-router-dom';
 
 export default class NavBarRight extends Component {
   state = {
@@ -98,7 +99,11 @@ export default class NavBarRight extends Component {
               <i className="far fa-user" />
               <span id={styles['user-popup']}>
                 <ul className={styles['nav-ul']}>
-                  <li className={styles['nav-li-popup']}>Login</li>
+                  <li className={styles['nav-li-popup']}>
+                    <NavLink to="/login" className={styles['a']}>
+                      Login
+                    </NavLink>
+                  </li>
                   <li className={styles['nav-li-popup']}>My Profile</li>
                   <li className={styles['nav-li-popup']}>My Orders</li>
                 </ul>

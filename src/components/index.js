@@ -10,4 +10,6 @@ export { default as Collections } from './Collections';
 export { default as LeftNav } from './grid/leftNav/LeftNav';
 export { default as Catagory } from './grid/leftNav/Catagory';
 export { default as ImageHover } from './grid/ImageHover';
-export { default as Login } from './Login';
+export { default as LoginSignUpPage } from './loginSignUp/LoginSignUpPage';
+export { default as SignUpForm } from './loginSignUp/SignUpForm';
+export { default as LoginForm } from './loginSignUp/LoginForm';

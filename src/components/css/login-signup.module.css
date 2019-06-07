@@ -1,0 +1,83 @@
+.forms-container {
+  background-color: rgb(239, 238, 233) !important;
+  display: flex;
+  justify-content: center;
+  padding: 3em;
+  /* align-items: center; */
+}
+
+.form-container {
+  margin: 0 1rem 1rem;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1em;
+}
+
+.form-title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0 0 0.2em;
+  font-family: Taviraj, serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  -webkit-letter-spacing: -0.02em;
+  -moz-letter-spacing: -0.02em;
+  -ms-letter-spacing: -0.02em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.form input {
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  margin: 10px 0px;
+  padding: 0.75em;
+  font-size: 1rem;
+  border-style: solid;
+}
+
+.form input:focus {
+  outline: none;
+}
+
+.form #warning {
+  border-color: rgba(255, 0, 0, 1);
+}
+
+.form #warning:after {
+  content: 'This field is required';
+  color: rgba(255, 0, 0, 1);
+}
+
+.input {
+  border-width: 2px;
+  border-color: rgba(0, 0, 0, 0.5);
+  margin: 10px;
+  width: 100%;
+}
+
+#warning {
+  border-color: rgba(255, 0, 0, 1);
+}
+
+.no-error {
+  visibility: hidden;
+}
+
+.error {
+  visibility: visible;
+}
+
+@media (max-width: 1024px) {
+  .forms-container {
+    flex-direction: column;
+    /* justify-content: center; */
+    padding: 3em;
+    background-color: red;
+    width: 400px;
+    /* align-items: center; */
+  }
+}

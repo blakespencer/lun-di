@@ -24,9 +24,9 @@ export default class NavBarLeft extends Component {
             </li>
           </ul>
         </MediaQuery>
-        <MediaQuery maxWidth={1025}>
+        <MediaQuery maxWidth={1024}>
           <ul className={styles['nav-ul']}>
-            <li className={styles['nav-li']}>Drop Down</li>
+            <li className={styles['nav-li']}>☰</li>
             <li className={styles['nav-li']}>
               <i className="fas fa-search" />
             </li>

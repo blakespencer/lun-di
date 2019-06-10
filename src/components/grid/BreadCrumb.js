@@ -5,10 +5,6 @@ import { getProducts } from '../../store/products';
 import { connect } from 'react-redux';
 
 class BreadCrumb extends Component {
-  async componentDidUpdate() {
-    const { catagory, productType } = this.props.match.params;
-    await this.props.getProducts(catagory, productType);
-  }
   render() {
     const urlParams = Object.values(this.props.match.params);
     return (

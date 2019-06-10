@@ -12,6 +12,16 @@ class ProductGrid extends Component {
     await this.props.getProducts(catagory, productType);
   }
 
+  async componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.match.params.productType === prevProps.match.params.productType
+    ) {
+      return;
+    }
+    const { catagory, productType } = this.props.match.params;
+    await this.props.getProducts(catagory, productType);
+  }
+
   render() {
     const { products } = this.props;
     return (

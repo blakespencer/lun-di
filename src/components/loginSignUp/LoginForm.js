@@ -45,12 +45,12 @@ export default class LoginForm extends Component {
 
   render() {
     const { password, email } = this.state;
-    const names = Object.keys(this.state).filter(el => el !== 'isDisabled');
+    const names = Object.keys(this.state)
     // This is checking to see if there are errors
     const isDisabled =
-      Object.values(this.state).reduce((i, j) => {
-        return i.isError || j.isError || !i.value || !j.value;
-      }) || password.value.length < 6;
+    Object.values(this.state).reduce((accumulator, currentValue) => {
+      return accumulator || currentValue.isError || !currentValue.value
+    }, false) || password.value.length < 6 || !/\S+@\S+\.\S+/.test(email.value)
 
     return (
       <div className={styles['form-container']}>

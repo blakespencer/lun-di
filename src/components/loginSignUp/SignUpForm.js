@@ -20,6 +20,7 @@ export default class loginForm extends Component {
       value: '',
       errorMessage: 'This field is required',
       placeholder: 'Password',
+      isError: false,
       type: 'password',
       hasErrored: false,
     },
@@ -30,6 +31,7 @@ export default class loginForm extends Component {
       isError: false,
       placeholder: 'First Name',
       type: 'text',
+      hasErrored: false,
     },
     lastName: {
       typed: false,
@@ -38,6 +40,7 @@ export default class loginForm extends Component {
       isError: false,
       placeholder: 'Last Name',
       type: 'text',
+      hasErrored: false,
     },
   };
 
@@ -72,12 +75,11 @@ export default class loginForm extends Component {
 
   render() {
     const { password, email } = this.state;
-    const names = Object.keys(this.state).filter(el => el !== 'isDisabled');
+    const names = Object.keys(this.state)
     const isDisabled =
-    Object.values(this.state).reduce((i, j) => {
-      return i.isError || j.isError || !i.value || !j.value;
-    }) || password.value.length < 6;
-      // ||  /\S+@\S+\.\S+/.test(email.value)
+    Object.values(this.state).reduce((accumulator, currentValue) => {
+      return accumulator || currentValue.isError || !currentValue.value
+    }, false) || password.value.length < 6 || !/\S+@\S+\.\S+/.test(email.value)
     return (
       <div className={styles['form-container']}>
         <div className={styles['form-title']}>New Member</div>

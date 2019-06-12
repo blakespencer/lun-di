@@ -13,3 +13,4 @@ export { default as ImageHover } from './grid/ImageHover';
 export { default as LoginSignUpPage } from './loginSignUp/LoginSignUpPage';
 export { default as SignUpForm } from './loginSignUp/SignUpForm';
 export { default as LoginForm } from './loginSignUp/LoginForm';
+export { default as Input } from './loginSignUp/Input';

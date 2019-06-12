@@ -12,7 +12,7 @@ export default class LoginSignUp extends Component {
         id={stylesContent['content']}
         className={`${styles['forms-container']}`}
       >
-        <section>
+        <section className={styles['section']}>
           <div className={`${styles['forms-container']}`}>
             <LoginForm />
             <SignUpForm />

@@ -77,6 +77,40 @@
   color: red;
 }
 
+.button {
+  font-family: Ubuntu,sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  -webkit-letter-spacing: .17em;
+  -moz-letter-spacing: .17em;
+  -ms-letter-spacing: .17em;
+  letter-spacing: .17em;
+  font-size: .75rem;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #364652;
+  -webkit-transition: background-color .25s ease-out;
+  transition: background-color .25s ease-out;
+}
+
+.button:disabled {
+  background-color: #747474;
+  color: #999;
+  cursor: not-allowed;
+}
+
 @media (max-width: 1024px) {
   .forms-container {
     flex-direction: column;

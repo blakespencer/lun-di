@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from '../css/login-signup.module.css';
 import axios from 'axios';
 import { Input } from '..';
+import { validate } from './utils';
 
 export default class loginForm extends Component {
   state = {
@@ -12,6 +13,7 @@ export default class loginForm extends Component {
       isError: false,
       placeholder: 'Email Address',
       type: 'email',
+      hasErrored: false,
     },
     password: {
       typed: false,
@@ -37,41 +39,19 @@ export default class loginForm extends Component {
       placeholder: 'Last Name',
       type: 'text',
     },
-    isDisabled: false,
   };
 
   handleChange = evt => {
-    // create a utils folder for this function it is a mess
-    let errorMessage = 'This field is required';
     const name = evt.target.name;
     const value = evt.target.value;
-    let { isError, hasErrored } = this.state[name];
-    let { isDisabled } = this.state;
-    if (!value) {
-      isError = true;
-      hasErrored = true;
-    } else if (value.length > 6 && name === 'password') {
-      hasErrored = true;
-    } else if (name === 'password' && value.length < 6 && hasErrored) {
-      isError = true;
-      errorMessage = 'Must be atleast 6 characters';
-    } else {
-      isError = false;
-    }
-    if (isError) {
-      isDisabled = true;
-    }
 
     this.setState({
       [name]: {
         ...this.state[name],
         typed: true,
         value: value,
-        errorMessage,
-        isError,
-        hasErrored,
+        ...validate(evt, this.state),
       },
-      isDisabled,
     });
   };
 
@@ -91,8 +71,13 @@ export default class loginForm extends Component {
   };
 
   render() {
+    const { password, email } = this.state;
     const names = Object.keys(this.state).filter(el => el !== 'isDisabled');
-    const { isDisabled } = this.state;
+    const isDisabled =
+    Object.values(this.state).reduce((i, j) => {
+      return i.isError || j.isError || !i.value || !j.value;
+    }) || password.value.length < 6;
+      // ||  /\S+@\S+\.\S+/.test(email.value)
     return (
       <div className={styles['form-container']}>
         <div className={styles['form-title']}>New Member</div>
@@ -107,10 +92,7 @@ export default class loginForm extends Component {
               />
             );
           })}
-          <button
-            type="submit"
-            className={isDisabled ? styles['disabled'] : null}
-          >
+          <button type="submit" disabled={isDisabled} className={styles['button']}>
             Sign Up
           </button>
         </form>

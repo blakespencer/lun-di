@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from '../css/login-signup.module.css';
 import { Input } from '../index';
+import { validate } from './utils';
 
 export default class LoginForm extends Component {
   state = {
@@ -11,6 +12,7 @@ export default class LoginForm extends Component {
       isError: false,
       placeholder: 'Email Address',
       type: 'email',
+      hasErrored: false,
     },
     password: {
       typed: false,
@@ -24,31 +26,15 @@ export default class LoginForm extends Component {
   };
 
   handleChange = evt => {
-    // create a utils folder for this function it is a mess
-    let errorMessage = 'This field is required';
     const name = evt.target.name;
     const value = evt.target.value;
-    let { isError, hasErrored } = this.state[name];
-    if (!value) {
-      isError = true;
-      hasErrored = true;
-    } else if (value.length > 6 && name === 'password') {
-      hasErrored = true;
-    } else if (name === 'password' && value.length < 6 && hasErrored) {
-      isError = true;
-      errorMessage = 'Must be atleast 6 characters';
-    } else {
-      isError = false;
-    }
 
     this.setState({
       [name]: {
         ...this.state[name],
         typed: true,
         value: value,
-        errorMessage,
-        isError,
-        hasErrored,
+        ...validate(evt, this.state),
       },
     });
   };
@@ -58,11 +44,14 @@ export default class LoginForm extends Component {
   };
 
   render() {
+    const { password, email } = this.state;
     const names = Object.keys(this.state).filter(el => el !== 'isDisabled');
-    const isDisabled = Object.values(this.state).reduce(
-      (i, j) => i.isError || j.isError
-    );
-    console.log(isDisabled);
+    // This is checking to see if there are errors
+    const isDisabled =
+      Object.values(this.state).reduce((i, j) => {
+        return i.isError || j.isError || !i.value || !j.value;
+      }) || password.value.length < 6;
+
     return (
       <div className={styles['form-container']}>
         <div className={styles['form-title']}>Login</div>
@@ -77,7 +66,7 @@ export default class LoginForm extends Component {
               />
             );
           })}
-          <button type="submit" disabled={isDisabled}>
+          <button type="submit" disabled={isDisabled} className={styles['button']}>
             Login
           </button>
         </form>

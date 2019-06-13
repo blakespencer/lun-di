@@ -1,4 +1,6 @@
 export { default as NavBar } from './navbar/NavBar';
+export { default as UserPopup } from './navbar/UserPopup';
+export { default as Popup } from './navbar/Popup';
 export { default as ProductsView } from './ProductsView';
 export { default as ProductProfile } from './grid/ProductProfile';
 export { default as ImageTitle } from './ImageTitle';

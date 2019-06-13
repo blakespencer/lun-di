@@ -4,7 +4,7 @@ import axios from 'axios';
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER';
-// const REMOVE_USER = 'REMOVE_USER';
+const REMOVE_USER = 'REMOVE_USER';
 const LOGIN_USER = 'LOGIN_USER';
 const REGISTER_USER = 'REGISTER_USER';
 
@@ -17,7 +17,7 @@ const defaultUser = {};
  * ACTION CREATORS
  */
 const gotUser = user => ({ type: GET_USER, user });
-// const removeUser = () => ({ type: REMOVE_USER });
+const removeUser = () => ({ type: REMOVE_USER });
 const registeredUser = user => ({ type: REGISTER_USER, user });
 const loggedInUser = user => ({ type: LOGIN_USER, user });
 
@@ -65,10 +65,20 @@ export const loginUser = user => async dispatch => {
       password,
     });
     const { firstName, lastName, token } = res.data;
+    localStorage.setItem('JWT', token);
     dispatch(loggedInUser({ email, firstName, lastName }));
-    return { firstName, lastName, email, token };
+    return { firstName, lastName, email };
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const logoutUser = () => async dispatch => {
+  try {
+    localStorage.clear();
+    dispatch(removeUser());
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -79,8 +89,8 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user;
-    // case REMOVE_USER:
-    //   return defaultUser;
+    case REMOVE_USER:
+      return defaultUser;
     case LOGIN_USER:
       return action.user;
     case REGISTER_USER:

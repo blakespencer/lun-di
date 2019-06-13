@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import styles from '../css/nav.module.css';
-import Popup from './Popup';
-import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-
+import { Popup, UserPopup } from '../';
 class NavBarRight extends Component {
   state = {
     hover: 'none',
@@ -21,8 +18,6 @@ class NavBarRight extends Component {
   };
 
   render() {
-    const isLoggedIn = !!this.props.user.email;
-    console.log(isLoggedIn);
     const { hover, country, currency } = this.state;
     return (
       <React.Fragment>
@@ -30,13 +25,7 @@ class NavBarRight extends Component {
           <ul className={styles['nav-ul']} id={styles.right}>
             <li className={`${styles['nav-li']}`} id={styles['nav-user']}>
               <i className="far fa-user" />
-              <span id={styles['user-popup']}>
-                <ul className={styles['nav-ul']}>
-                  <li className={styles['nav-li-popup']}>Login</li>
-                  <li className={styles['nav-li-popup']}>My Profile</li>
-                  <li className={styles['nav-li-popup']}>My Orders</li>
-                </ul>
-              </span>
+              <UserPopup />
             </li>
             <li className={styles['nav-li']}>
               <i className="fas fa-shopping-cart" />
@@ -100,17 +89,7 @@ class NavBarRight extends Component {
               id={styles['nav-user']}
             >
               <i className="far fa-user" />
-              <span id={styles['user-popup']}>
-                <ul className={styles['nav-ul']}>
-                  <li className={styles['nav-li-popup']}>
-                    <NavLink to="/login" className={styles['a']}>
-                      Login
-                    </NavLink>
-                  </li>
-                  <li className={styles['nav-li-popup']}>My Profile</li>
-                  <li className={styles['nav-li-popup']}>My Orders</li>
-                </ul>
-              </span>
+              <UserPopup />
             </li>
             <li className={styles['nav-li']}>
               <i className="fas fa-shopping-cart" />
@@ -121,11 +100,4 @@ class NavBarRight extends Component {
     );
   }
 }
-const mapStateToProps = ({ user }) => ({
-  user,
-});
-
-export default connect(
-  mapStateToProps,
-  null
-)(NavBarRight);
+export default NavBarRight;

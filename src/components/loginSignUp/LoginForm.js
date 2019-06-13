@@ -4,6 +4,7 @@ import { Input } from '../index';
 import { validate, isDisabledButton } from './utils';
 import { connect } from 'react-redux';
 import { loginUser } from '../../store/user';
+import { withRouter } from 'react-router-dom';
 
 class LoginForm extends Component {
   state = {
@@ -49,7 +50,7 @@ class LoginForm extends Component {
         email: email.value,
         password: password.value,
       });
-      localStorage.setItem('JWT', res.token);
+      this.props.history.goBack();
     } catch (err) {
       console.error(err);
     }
@@ -91,7 +92,9 @@ const mapDispatchToProps = dispatch => ({
   loginUser: user => dispatch(loginUser(user)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(LoginForm);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(LoginForm)
+);

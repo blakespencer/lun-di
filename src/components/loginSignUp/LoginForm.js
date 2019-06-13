@@ -46,7 +46,7 @@ class LoginForm extends Component {
     evt.preventDefault();
     const { email, password } = this.state;
     try {
-      const res = await this.props.loginUser({
+      await this.props.loginUser({
         email: email.value,
         password: password.value,
       });

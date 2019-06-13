@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const { User } = require('../db/models');
 const passport = require('passport');
-const jwtSecret = require('../../secrets').JWT_SECRET;
+const { JWT_SECRET } = require('../../secrets');
 const jwt = require('jsonwebtoken');
+const isAdmin = require('../config/authenticateMiddleware');
 
 router.post('/registerUser', (req, res, next) => {
   passport.authenticate('register', (err, user, info) => {
@@ -53,7 +54,7 @@ router.post('/loginUser', (req, res, next) => {
             },
           });
           const { firstName, lastName } = userRes;
-          const token = jwt.sign({ id: email }, jwtSecret);
+          const token = jwt.sign({ id: email }, JWT_SECRET);
           res.status(200).send({
             auth: true,
             token: token,
@@ -93,18 +94,15 @@ router.get('/me', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email'],
-    });
-    res.json(users);
-  } catch (err) {
-    next(err);
-  }
+const adminPolicy = [passport.authenticate('jwt', { session: false }), isAdmin];
+
+router.put('/', adminPolicy, async (req, res, next) => {
+  const user = await User.findOne({
+    where: {
+      email: req.body.email,
+    },
+  });
+  res.status(200).json(user);
 });
 
 module.exports = router;

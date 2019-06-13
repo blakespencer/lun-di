@@ -22,6 +22,10 @@ const User = db.define('user', {
   lastName: {
     type: Sequelize.STRING,
   },
+  role: {
+    type: Sequelize.INTEGER,
+    defaultValue: 2,
+  },
   // salt: {
   //   type: Sequelize.STRING,
   //   // Making `.salt` act like a function hides it when serializing to JSON.
@@ -32,7 +36,11 @@ const User = db.define('user', {
   // },
 });
 
-module.exports = User;
+module.exports = {
+  User,
+  ADMIN_ROLE: 1,
+  STANDARD_ROLE: 2,
+};
 
 /**
  * instanceMethods

@@ -43,12 +43,13 @@ export const me = () => async dispatch => {
 
 export const registerUser = user => async dispatch => {
   try {
-    const { email, password, firstName, lastName } = user;
+    const { email, password, firstName, lastName, role } = user;
     const res = axios.post('/api/users/registerUser', {
       email,
       password,
       firstName,
       lastName,
+      role: role || 2,
     });
     dispatch(registeredUser(user));
     return res;

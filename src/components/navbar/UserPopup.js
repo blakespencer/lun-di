@@ -21,7 +21,10 @@ class UserPopup extends Component {
           ) : (
             <React.Fragment>
               <li className={styles['nav-li-popup']}>
-                <NavLink to="/login" className={styles['a']}>
+                <NavLink
+                  to="/login"
+                  className={`${styles['a']} ${styles['nav-li-popup']}`}
+                >
                   Login
                 </NavLink>
               </li>

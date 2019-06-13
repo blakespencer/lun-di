@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import styles from '../css/login-signup.module.css';
 import { Input } from '../index';
-import { validate } from './utils';
+import { validate, isDisabledButton } from './utils';
+import { connect } from 'react-redux';
+import { loginUser } from '../../store/user';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   state = {
     email: {
       typed: false,
-      value: '',
+      value: 'me@me.com',
       errorMessage: 'This field is required',
       isError: false,
       placeholder: 'Email Address',
@@ -16,7 +18,7 @@ export default class LoginForm extends Component {
     },
     password: {
       typed: false,
-      value: '',
+      value: 'soccer',
       errorMessage: 'This field is required',
       isError: false,
       placeholder: 'Password',
@@ -39,18 +41,24 @@ export default class LoginForm extends Component {
     });
   };
 
-  handleSubmit = evt => {
+  handleSubmit = async evt => {
     evt.preventDefault();
+    const { email, password } = this.state;
+    try {
+      const res = await this.props.loginUser({
+        email: email.value,
+        password: password.value,
+      });
+      localStorage.setItem('JWT', res.token);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   render() {
-    const { password, email } = this.state;
-    const names = Object.keys(this.state)
+    const names = Object.keys(this.state);
     // This is checking to see if there are errors
-    const isDisabled =
-    Object.values(this.state).reduce((accumulator, currentValue) => {
-      return accumulator || currentValue.isError || !currentValue.value
-    }, false) || password.value.length < 6 || !/\S+@\S+\.\S+/.test(email.value)
+    const isDisabled = isDisabledButton(this.state);
 
     return (
       <div className={styles['form-container']}>
@@ -66,7 +74,11 @@ export default class LoginForm extends Component {
               />
             );
           })}
-          <button type="submit" disabled={isDisabled} className={styles['button']}>
+          <button
+            type="submit"
+            disabled={isDisabled}
+            className={styles['button']}
+          >
             Login
           </button>
         </form>
@@ -74,3 +86,12 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: user => dispatch(loginUser(user)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(LoginForm);

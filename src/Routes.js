@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import { Login, Signup, UserHome } from './components';
 import { ProductsView, LoginSignUpPage } from './components';
-import { me } from './store';
-// import { getProductTypes } from './store/productTypes';
+import { me } from './store/user';
 import { getCatagories } from './store/catagories';
-import styles from './components/css/nav.module.css';
-
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();

@@ -11,7 +11,7 @@ router.post('/registerUser', (req, res, next) => {
     }
     if (info !== undefined) {
       console.log(info.message);
-      res.send(info.message);
+      res.send(info);
     } else {
       req.logIn(user, async err => {
         try {
@@ -35,7 +35,7 @@ router.post('/registerUser', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/loginUser', (req, res, next) => {
+router.post('/loginUser', (req, res, next) => {
   passport.authenticate('login', (err, user, info) => {
     if (err) {
       console.log(err);
@@ -47,17 +47,20 @@ router.get('/loginUser', (req, res, next) => {
       req.logIn(user, async err => {
         const { email } = user;
         try {
-          const user = User.findOne({
+          const userRes = await User.findOne({
             where: {
               email,
             },
           });
-
-          const token = jwt.sign({ id: email }, jwtSecret.secret);
+          const { firstName, lastName } = userRes;
+          const token = jwt.sign({ id: email }, jwtSecret);
           res.status(200).send({
             auth: true,
             token: token,
             message: 'user found & logged in',
+            firstName,
+            lastName,
+            email,
           });
         } catch (err) {
           console.log(err);
@@ -67,7 +70,7 @@ router.get('/loginUser', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/findUser', (req, res, next) => {
+router.get('/me', (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user, info) => {
     if (err) {
       console.log(err);

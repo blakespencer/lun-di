@@ -24,3 +24,14 @@ export const validate = (evt, state) => {
     errorMessage,
   };
 };
+
+export const isDisabledButton = state => {
+  const { email, password } = state;
+  return (
+    Object.values(state).reduce((accumulator, currentValue) => {
+      return accumulator || currentValue.isError || !currentValue.value;
+    }, false) ||
+    password.value.length < 6 ||
+    !/\S+@\S+\.\S+/.test(email.value)
+  );
+};

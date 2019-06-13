@@ -1,4 +1,4 @@
-const jwtSecret = process.env.JWT_SECRET || require('../../secrets');
+const jwtSecret = process.env.JWT_SECRET || require('../../secrets').JWT_SECRET;
 const bcrypt = require('bcrypt');
 
 const BCRYPT_SALT_ROUNDS = 12;
@@ -26,7 +26,10 @@ passport.use(
         });
         if (user !== null) {
           console.log('username alreaey taken');
-          return done(null, false, { message: 'username alreaey taken' });
+          return done(null, false, {
+            message: 'Email alreaey taken',
+            status: 400,
+          });
         } else {
           const hashedPassword = await bcrypt.hash(
             password,
@@ -54,26 +57,24 @@ passport.use(
       passwordField: 'password',
       session: false,
     },
-    (username, password, done) => {
+    async (username, password, done) => {
       try {
-        User.findOne({
+        const user = await User.findOne({
           where: {
             email: username,
           },
-        }).then(user => {
-          if (user === null) {
-            return done(null, false, { message: 'bad username' });
-          } else {
-            bcrypt.compare(password, user.password).then(response => {
-              if (response !== true) {
-                console.log('password do not match');
-                return done(null, false, { message: 'passwords do not match' });
-              }
-              console.log('user found & authenticated');
-              return done(null, user);
-            });
-          }
         });
+        if (user === null) {
+          return done(null, false, { message: 'bad username' });
+        } else {
+          const response = await bcrypt.compare(password, user.password());
+          if (response !== true) {
+            console.log('password do not match');
+            return done(null, false, { message: 'passwords do not match' });
+          }
+          console.log('user found & authenticated');
+          return done(null, user);
+        }
       } catch (err) {
         done(err);
       }
@@ -83,26 +84,25 @@ passport.use(
 
 const opts = {
   jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme('JWT'),
-  secretOrKey: jwtSecret.JWT_SECRET,
+  secretOrKey: jwtSecret,
 };
 
 passport.use(
   'jwt',
-  new JWTstrategy(opts, (jwt_payload, done) => {
+  new JWTstrategy(opts, async (jwt_payload, done) => {
     try {
-      User.findOne({
+      const user = await User.findOne({
         where: {
-          email: jwtSecret.payload.id,
+          email: jwt_payload.id,
         },
-      }).then(user => {
-        if (user) {
-          console.log('user found in db in passport');
-          done(null, user);
-        } else {
-          console.log('user not found in db');
-          done(null, false);
-        }
       });
+      if (user) {
+        console.log('user found in db in passport');
+        done(null, user);
+      } else {
+        console.log('user not found in db');
+        done(null, false);
+      }
     } catch (err) {
       done(err);
     }

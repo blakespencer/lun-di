@@ -3,8 +3,9 @@ import MediaQuery from 'react-responsive';
 import styles from '../css/nav.module.css';
 import Popup from './Popup';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class NavBarRight extends Component {
+class NavBarRight extends Component {
   state = {
     hover: 'none',
     country: 'UK',
@@ -20,6 +21,8 @@ export default class NavBarRight extends Component {
   };
 
   render() {
+    const isLoggedIn = !!this.props.user.email;
+    console.log(isLoggedIn);
     const { hover, country, currency } = this.state;
     return (
       <React.Fragment>
@@ -118,3 +121,11 @@ export default class NavBarRight extends Component {
     );
   }
 }
+const mapStateToProps = ({ user }) => ({
+  user,
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(NavBarRight);

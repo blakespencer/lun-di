@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import styles from '../css/nav.module.css';
-import { Popup, UserPopup } from '../';
+import { Popup, UserPopup, CartPopup } from '../';
 class NavBarRight extends Component {
   state = {
     hover: 'none',
@@ -91,8 +91,12 @@ class NavBarRight extends Component {
               <i className="far fa-user" />
               <UserPopup />
             </li>
-            <li className={styles['nav-li']}>
+            <li
+              className={`${styles['nav-li']} ${styles['nav-hover']}`}
+              id={styles['nav-cart']}
+            >
               <i className="fas fa-shopping-cart" />
+              <CartPopup />
             </li>
           </ul>
         </MediaQuery>

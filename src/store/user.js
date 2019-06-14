@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCart } from './cart';
 
 /**
  * ACTION TYPES
@@ -35,6 +36,8 @@ export const me = () => async dispatch => {
         headers: { Authorization: `JWT ${accessString}` },
       });
       dispatch(gotUser(res.data));
+      // Now we have a user, we can get the cart
+      dispatch(getCart(accessString));
     }
   } catch (err) {
     console.log(err);

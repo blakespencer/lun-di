@@ -1,3 +1,4 @@
+const passport = require('passport');
 const { ADMIN_ROLE } = require('../db/models/user');
 
 const isAdmin = (req, res, next) => {
@@ -7,4 +8,8 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-module.exports = isAdmin;
+const adminPolicy = [passport.authenticate('jwt', { session: false }), isAdmin];
+
+const userPolicy = passport.authenticate('jwt', { session: false });
+
+module.exports = { isAdmin, adminPolicy, userPolicy };

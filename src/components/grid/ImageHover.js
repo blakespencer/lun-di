@@ -1,30 +1,16 @@
 import React, { Component } from 'react';
 import styles from '../css/product-profile.module.css';
+import { updateCart } from '../../store/cart';
+import { connect } from 'react-redux';
 
-export default class ImageHover extends Component {
-  // state = {
-  //   isMouseOverBar: false,
-  // };
-
-  // handleMouse = evt => {
-  //   const { isMouseOverBar } = this.state;
-  //   console.log('inside', isMouseOverBar);
-  //   this.setState({
-  //     isHover: !isMouseOverBar,
-  //   });
-  // };
-
-  // shouldComponentUpdate = (prevProps, nextProps) => {
-  //   return prevProps.isMouseOver === nextProps.isMouseOver;
-  // };
-
-  handleClick = evt => {
+class ImageHover extends Component {
+  handleClick = (evt, id) => {
     evt.preventDefault();
+    this.props.updateCart(id, 1);
   };
 
   render() {
-    const { name, isMouseOver } = this.props;
-    // const { isMouseOverBar } = this.state;
+    const { name, id } = this.props;
     return (
       <div
         className={styles['image-container']}
@@ -33,14 +19,14 @@ export default class ImageHover extends Component {
         }}
         id={name}
       >
-        <div
-          className={`${styles['quick-add-bar-container']}`}
-          onClick={this.handleClick}
-        >
+        <div className={`${styles['quick-add-bar-container']}`}>
           <div className={`${styles['quick-add-bar']}`}>
             <div className={styles['quick-add-text']}>+ Quick Add</div>
           </div>
-          <div className={`${styles['quick-add-bar-alt']}`}>
+          <div
+            className={`${styles['quick-add-bar-alt']}`}
+            onClick={evt => this.handleClick(evt, id)}
+          >
             <div className={styles['quick-add-text']}>extra small etc</div>
           </div>
         </div>
@@ -48,3 +34,13 @@ export default class ImageHover extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  updateCart: (productId, quantity) =>
+    dispatch(updateCart(productId, quantity)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ImageHover);

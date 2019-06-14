@@ -3,7 +3,7 @@ const { User } = require('../db/models');
 const passport = require('passport');
 const { JWT_SECRET } = require('../../secrets');
 const jwt = require('jsonwebtoken');
-const isAdmin = require('../config/authenticateMiddleware');
+const { isAdmin, adminPolicy } = require('../config/authenticateMiddleware');
 
 router.post('/registerUser', (req, res, next) => {
   passport.authenticate('register', (err, user, info) => {
@@ -93,8 +93,6 @@ router.get('/me', (req, res, next) => {
     }
   })(req, res, next);
 });
-
-const adminPolicy = [passport.authenticate('jwt', { session: false }), isAdmin];
 
 router.put('/', adminPolicy, async (req, res, next) => {
   const user = await User.findOne({

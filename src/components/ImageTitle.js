@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styles from './css/content.module.css';
-import Background from '../images/example_pic.jpg';
 
 export default class ImageTitle extends Component {
   render() {
-    const { imagePath, text } = this.props;
+    const { text } = this.props;
     return (
       <div
         className={styles['image-container']}

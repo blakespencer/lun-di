@@ -51,7 +51,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
+    async loadInitialData() {
       dispatch(me());
       dispatch(getCatagories());
     },

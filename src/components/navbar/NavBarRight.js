@@ -7,6 +7,7 @@ class NavBarRight extends Component {
     hover: 'none',
     country: 'UK',
     currency: 'GBP',
+    cartCount: 0,
   };
 
   handleHover = type => {
@@ -17,8 +18,19 @@ class NavBarRight extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   };
 
+  countCart = cart => {
+    let cartCount = 0;
+    cart.forEach(item => {
+      cartCount += item.quantity;
+    });
+    this.setState({
+      cartCount,
+    });
+    console.log('hello');
+  };
+
   render() {
-    const { hover, country, currency } = this.state;
+    const { hover, country, currency, cartCount } = this.state;
     return (
       <React.Fragment>
         <MediaQuery maxWidth={1025}>
@@ -91,12 +103,12 @@ class NavBarRight extends Component {
               <i className="far fa-user" />
               <UserPopup />
             </li>
-            <li
-              className={`${styles['nav-li']} ${styles['nav-hover']}`}
-              id={styles['nav-cart']}
-            >
+            <li className={`${styles['nav-li']}`} id={styles['nav-cart']}>
               <i className="fas fa-shopping-cart" />
-              <CartPopup />
+              {!!cartCount && (
+                <div className={styles['cart-count']}>{cartCount}</div>
+              )}
+              <CartPopup countCart={this.countCart} />
             </li>
           </ul>
         </MediaQuery>

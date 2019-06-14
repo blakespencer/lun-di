@@ -65,12 +65,16 @@ passport.use(
           },
         });
         if (user === null) {
-          return done(null, false, { message: 'bad username' });
+          return done(null, false, {
+            message: 'username or password is incorrect',
+          });
         } else {
           const response = await bcrypt.compare(password, user.password());
           if (response !== true) {
             console.log('password do not match');
-            return done(null, false, { message: 'passwords do not match' });
+            return done(null, false, {
+              message: 'username or password is incorrect',
+            });
           }
           console.log('user found & authenticated');
           return done(null, user);

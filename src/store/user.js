@@ -71,6 +71,7 @@ export const loginUser = user => async dispatch => {
     const { firstName, lastName, token } = res.data;
     localStorage.setItem('JWT', token);
     dispatch(loggedInUser({ email, firstName, lastName }));
+    dispatch(getCart(token));
     return { firstName, lastName, email };
   } catch (err) {
     console.error(err);

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { displayCartPopup } from './isDisplayCartPopup';
 
 // ACTION TYPES
 
@@ -36,8 +37,8 @@ export const updateCart = (productId, quantity) => async dispatch => {
         headers: { Authorization: `JWT ${accessString}` },
       }
     );
-    console.log(res.data);
     dispatch(updatedCart(res.data));
+    dispatch(displayCartPopup());
   } catch (err) {
     console.log(err);
   }

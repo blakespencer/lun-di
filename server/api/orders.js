@@ -17,6 +17,8 @@ router.get('/cart', userPolicy, async (req, res, next) => {
       },
     });
 
+    // If created, don't need to find it since the cart will be empty
+
     res.json(order.items);
     // res.json(cart);
   } catch (err) {

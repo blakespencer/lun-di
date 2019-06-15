@@ -5,6 +5,7 @@ import { displayCartPopup } from './isDisplayCartPopup';
 
 const GET_CART = 'GET_CART';
 const UPDATE_CART = 'UPDATE_CART';
+const INC_ITEM = 'INC_ITEM';
 
 // INITIAL STATE
 
@@ -14,6 +15,7 @@ const defaultCart = [];
 
 const gotCart = payload => ({ type: GET_CART, payload });
 const updatedCart = payload => ({ type: UPDATE_CART, payload });
+const incrementedItem = payload => ({ type: INC_ITEM, payload });
 
 // THUNK CREATORS
 export const getCart = accessString => async dispatch => {
@@ -44,26 +46,48 @@ export const updateCart = (productId, quantity) => async dispatch => {
   }
 };
 
+export const incItem = (productId, addition) => async dispatch => {
+  try {
+    const accessString = localStorage.getItem('JWT');
+    const res = await axios.put(
+      '/api/orders/cart/inc',
+      { productId, addition },
+      {
+        headers: { Authorization: `JWT ${accessString}` },
+      }
+    );
+    dispatch(incrementedItem(res.data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const updateHelper = (state, action) => {
+  const newState = [];
+  let isNew = true;
+  state.forEach(el => {
+    if (el.productId === action.payload.productId) {
+      newState.push(action.payload);
+      isNew = false;
+    } else {
+      newState.push(el);
+    }
+  });
+  if (isNew) {
+    newState.push(action.payload);
+  }
+  return newState;
+};
+
 // REDUCER
 export default (state = defaultCart, action) => {
   switch (action.type) {
     case GET_CART:
       return action.payload;
     case UPDATE_CART:
-      const newState = [];
-      let isNew = true;
-      state.forEach(el => {
-        if (el.productId === action.payload.productId) {
-          newState.push(action.payload);
-          isNew = false;
-        } else {
-          newState.push(el);
-        }
-      });
-      if (isNew) {
-        newState.push(action.payload);
-      }
-      return newState;
+      return updateHelper(state, action);
+    case INC_ITEM:
+      return updateHelper(state, action);
     default:
       return state;
   }

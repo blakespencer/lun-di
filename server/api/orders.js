@@ -26,6 +26,35 @@ router.get('/cart', userPolicy, async (req, res, next) => {
   }
 });
 
+// NOT SURE THE BEST RESTFUL API NAME...
+router.put('/cart/inc', userPolicy, async (req, res, next) => {
+  try {
+    const { productId, addition } = req.body;
+    // Make sure they can access only their cart
+    const cart = await Order.findOne({
+      where: { userId: req.user.id, status: 'cart' },
+      attributes: ['id'],
+    });
+    const orderId = cart.id;
+    const item = await Item.findOne({
+      where: {
+        orderId,
+        productId,
+      },
+      include: {
+        model: Product,
+        attributes: ['id', 'price', 'name', 'description', 'picture'],
+      },
+      attributes: ['quantity', 'productId', 'orderId'],
+    });
+    item.quantity += addition;
+    await item.save();
+    res.json(item);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.put('/cart', userPolicy, async (req, res, next) => {
   try {
     const { productId, quantity } = req.body;

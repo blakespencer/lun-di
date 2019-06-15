@@ -2,20 +2,28 @@ import React, { Component } from 'react';
 import stylesNav from '../css/nav.module.css';
 import styles from '../css/cart-popup.module.css';
 import { connect } from 'react-redux';
-import {
-  displayCartPopup,
-  hideCartPopup,
-} from '../../store/isDisplayCartPopup';
+import { hideCartPopup } from '../../store/isDisplayCartPopup';
 import { CartItemProfile } from '../index';
 
 class CartPopup extends Component {
-  handleClick = evt => {
-    this.props.hideCartPopup();
+  handleHover = evt => {
+    const { isDisplayCartPopup, hideCartPopup } = this.props;
+    if (isDisplayCartPopup) {
+      hideCartPopup();
+      document.removeEventListener('click', this.handleOutsideClick, false);
+    }
   };
 
-  handleHover = evt => {
-    if (this.props.isDisplayCartPopup) {
-      this.props.hideCartPopup();
+  componentDidUpdate(nextProps) {
+    if (nextProps.isDisplayCartPopup) {
+      document.addEventListener('click', this.handleOutsideClick, false);
+    }
+  }
+
+  handleOutsideClick = evt => {
+    const { isDisplayCartPopup, hideCartPopup } = this.props;
+    if (!this.node.contains(evt.target) && isDisplayCartPopup) {
+      hideCartPopup();
     }
   };
 
@@ -24,6 +32,9 @@ class CartPopup extends Component {
     this.props.countCart(cart);
     const isEmpty = !cart.length;
     const { isDisplayCartPopup } = this.props;
+    const total = cart.reduce((acc, curr) => {
+      return acc + curr.product.price * curr.quantity;
+    }, 1);
     return (
       <span
         className={stylesNav['cart-popup']}
@@ -34,10 +45,21 @@ class CartPopup extends Component {
         <div>
           <div className={styles['popup-container']}>
             <h3>Your Bag Summary</h3>
-            {isEmpty && <div>You're bag is empty</div>}
-            {cart.map(item => {
-              return <CartItemProfile item={item} key={item.productId} />;
-            })}
+            {isEmpty ? (
+              <div>You're bag is empty</div>
+            ) : (
+              <>
+                <div className={styles['cart-item-container']}>
+                  {cart.map(item => {
+                    return <CartItemProfile item={item} key={item.productId} />;
+                  })}
+                </div>
+                <div>
+                  <div>{`Subtotal: $${total}`}</div>
+                  <button>Checkout</button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </span>
@@ -51,7 +73,6 @@ const mapStateToProps = ({ cart, isDisplayCartPopup }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  displayCartPopup: () => dispatch(displayCartPopup()),
   hideCartPopup: () => dispatch(hideCartPopup()),
 });
 

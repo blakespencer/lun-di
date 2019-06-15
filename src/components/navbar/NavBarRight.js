@@ -26,7 +26,6 @@ class NavBarRight extends Component {
     this.setState({
       cartCount,
     });
-    console.log('hello');
   };
 
   render() {

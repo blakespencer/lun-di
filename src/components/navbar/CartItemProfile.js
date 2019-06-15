@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import styles from '../css/cart-popup.module.css';
 import { connect } from 'react-redux';
-import { incItem } from '../../store/cart';
+import { incItem, deleteItem } from '../../store/cart';
 
 class CartItemProfile extends Component {
   handleClick = addition => {
     const productId = this.props.item.product.id;
-    this.props.incItem(productId, addition);
+    const nextQuantity = this.props.item.quantity + addition;
+    if (nextQuantity !== 0) {
+      this.props.incItem(productId, addition);
+    } else {
+      this.props.deleteItem(productId);
+    }
   };
 
   render() {
@@ -49,6 +54,7 @@ class CartItemProfile extends Component {
 
 const mapDispatchToProps = dispatch => ({
   incItem: (productId, addition) => dispatch(incItem(productId, addition)),
+  deleteItem: productId => dispatch(deleteItem(productId)),
 });
 
 export default connect(

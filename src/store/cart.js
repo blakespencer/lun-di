@@ -6,6 +6,7 @@ import { displayCartPopup } from './isDisplayCartPopup';
 const GET_CART = 'GET_CART';
 const UPDATE_CART = 'UPDATE_CART';
 const INC_ITEM = 'INC_ITEM';
+const DELETE_ITEM = 'DELETE_ITEM';
 
 // INITIAL STATE
 
@@ -16,6 +17,7 @@ const defaultCart = [];
 const gotCart = payload => ({ type: GET_CART, payload });
 const updatedCart = payload => ({ type: UPDATE_CART, payload });
 const incrementedItem = payload => ({ type: INC_ITEM, payload });
+const deletedItem = payload => ({ type: DELETE_ITEM, payload });
 
 // THUNK CREATORS
 export const getCart = accessString => async dispatch => {
@@ -62,6 +64,20 @@ export const incItem = (productId, addition) => async dispatch => {
   }
 };
 
+export const deleteItem = productId => async dispatch => {
+  try {
+    const accessString = localStorage.getItem('JWT');
+    const res = await axios.delete('/api/orders/cart/item', {
+      headers: { Authorization: `JWT ${accessString}` },
+      params: { productId },
+    });
+    dispatch(deletedItem(res.data));
+    dispatch(displayCartPopup());
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const updateHelper = (state, action) => {
   const newState = [];
   let isNew = true;
@@ -74,8 +90,18 @@ const updateHelper = (state, action) => {
     }
   });
   if (isNew) {
-    newState.push(action.payload);
+    newState.unshift(action.payload);
   }
+  return newState;
+};
+
+const deleteHelper = (state, action) => {
+  const newState = [];
+  state.forEach(el => {
+    if (el.productId !== +action.payload.productId) {
+      newState.push(el);
+    }
+  });
   return newState;
 };
 
@@ -88,6 +114,9 @@ export default (state = defaultCart, action) => {
       return updateHelper(state, action);
     case INC_ITEM:
       return updateHelper(state, action);
+    case DELETE_ITEM:
+      console.log(deleteHelper(state, action));
+      return deleteHelper(state, action);
     default:
       return state;
   }

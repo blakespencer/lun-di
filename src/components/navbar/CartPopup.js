@@ -21,8 +21,11 @@ class CartPopup extends Component {
   }
 
   handleOutsideClick = evt => {
+    const isAddQuick = !evt.target.className.includes(
+      'product-profile_quick-add-text'
+    );
     const { isDisplayCartPopup, hideCartPopup } = this.props;
-    if (!this.node.contains(evt.target) && isDisplayCartPopup) {
+    if (!this.node.contains(evt.target) && isDisplayCartPopup && isAddQuick) {
       hideCartPopup();
     }
   };
@@ -56,7 +59,9 @@ class CartPopup extends Component {
                 </div>
                 <div>
                   <div>{`Subtotal: $${total}`}</div>
-                  <button>Checkout</button>
+                  <button type="submit" className={styles['btn']}>
+                    Checkout
+                  </button>
                 </div>
               </>
             )}

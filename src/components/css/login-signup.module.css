@@ -78,17 +78,17 @@
 }
 
 .button {
-  font-family: Ubuntu,sans-serif;
+  font-family: Ubuntu, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   border: none;
   color: #fff;
   cursor: pointer;
-  -webkit-letter-spacing: .17em;
-  -moz-letter-spacing: .17em;
-  -ms-letter-spacing: .17em;
-  letter-spacing: .17em;
-  font-size: .75rem;
+  -webkit-letter-spacing: 0.17em;
+  -moz-letter-spacing: 0.17em;
+  -ms-letter-spacing: 0.17em;
+  letter-spacing: 0.17em;
+  font-size: 0.75rem;
   -ms-flex-pack: center;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -101,14 +101,18 @@
   align-items: center;
   padding: 1rem;
   background-color: #364652;
-  -webkit-transition: background-color .25s ease-out;
-  transition: background-color .25s ease-out;
+  -webkit-transition: background-color 0.25s ease-out;
+  transition: background-color 0.25s ease-out;
 }
 
 .button:disabled {
   background-color: #747474;
   color: #999;
   cursor: not-allowed;
+}
+
+.button:focus {
+  outline: none;
 }
 
 @media (max-width: 1024px) {

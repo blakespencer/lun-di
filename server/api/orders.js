@@ -55,6 +55,28 @@ router.put('/cart/inc', userPolicy, async (req, res, next) => {
   }
 });
 
+router.delete('/cart/item/', userPolicy, async (req, res, next) => {
+  try {
+    const { productId } = req.query;
+    // Make sure they can access only their cart
+    const cart = await Order.findOne({
+      where: { userId: req.user.id, status: 'cart' },
+      attributes: ['id'],
+    });
+    const orderId = cart.id;
+    const item = await Item.findOne({
+      where: {
+        orderId,
+        productId,
+      },
+    });
+    await item.destroy({ force: true });
+    res.json({ productId });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.put('/cart', userPolicy, async (req, res, next) => {
   try {
     const { productId, quantity } = req.body;

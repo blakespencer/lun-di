@@ -45,9 +45,48 @@
   justify-content: space-between;
   height: 10px;
   padding: 0.5em;
+  width: 60px;
 }
 
 .item-quantity-btn {
   cursor: pointer;
   user-select: none;
+}
+
+.btn {
+  width: 100%;
+  font-family: Ubuntu, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  -webkit-letter-spacing: 0.17em;
+  -moz-letter-spacing: 0.17em;
+  -ms-letter-spacing: 0.17em;
+  letter-spacing: 0.17em;
+  font-size: 0.75rem;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #364652;
+  -webkit-transition: background-color 0.25s ease-out;
+  transition: background-color 0.25s ease-out;
+}
+
+.btn:hover {
+  background-color: rgb(255, 192, 203);
+  color: rgb(0, 0, 0, 0.5);
+}
+
+.btn:focus {
+  outline: none;
 }

@@ -33,7 +33,7 @@
   "scripts": {
     "starts": "react-scripts start",
     "start": "node server/",
-    "heroku-postbuild": "npm run buildcustom && node server/db/seed.js && npm start",
+    "heroku-postbuild": "npm run buildcustom && node server/db/seed.js",
     "buildcustom": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

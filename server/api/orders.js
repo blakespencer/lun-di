@@ -99,6 +99,7 @@ router.put('/cart', userPolicy, async (req, res, next) => {
       attributes: ['quantity', 'productId', 'orderId'],
     });
     // When createed, attributes are not accepted as a parameter...
+
     if (isCreated) {
       item = await Item.findOne({
         where: {

@@ -76,9 +76,6 @@ class SignUpForm extends Component {
           email: { ...email, serverError: true },
         });
       } else {
-        this.setState({
-          email: { ...email, serverError: false },
-        });
         this.props.history.goBack();
       }
     } catch (err) {

@@ -106,13 +106,21 @@
 }
 
 .button:disabled {
-  background-color: #747474;
-  color: #999;
+  background-color: rgb(116, 116, 116);
+  color: rgb(153, 153, 153);
   cursor: not-allowed;
 }
 
 .button:focus {
   outline: none;
+}
+
+.server-error {
+  background-color: rgba(252, 252, 150, 0.5);
+  padding: 0.5em;
+  margin-top: 0.5em;
+  text-align: center;
+  font-family: Taviraj, serif;
 }
 
 @media (max-width: 1024px) {

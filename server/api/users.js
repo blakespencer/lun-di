@@ -29,7 +29,8 @@ router.post('/registerUser', (req, res, next) => {
             lastName,
           });
           console.log('user created in db');
-          res.status(200).send({ message: 'user created' });
+          const token = jwt.sign({ id: email }, REACT_APP_JWT_SECRET);
+          res.status(200).send({ message: 'user created', token });
         } catch (err) {
           console.log(err);
         }
@@ -45,7 +46,7 @@ router.post('/loginUser', (req, res, next) => {
     }
     if (info !== undefined) {
       console.log(info.message);
-      res.send(info.message);
+      res.send({ error: info.message });
     } else {
       req.logIn(user, async err => {
         const { email } = user;

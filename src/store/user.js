@@ -47,14 +47,17 @@ export const me = () => async dispatch => {
 export const registerUser = user => async dispatch => {
   try {
     const { email, password, firstName, lastName, role } = user;
-    const res = axios.post('/api/users/registerUser', {
+    const res = await axios.post('/api/users/registerUser', {
       email,
       password,
       firstName,
       lastName,
       role: role || 2,
     });
+    const token = res.data.token;
+    localStorage.setItem('JWT', token);
     dispatch(registeredUser(user));
+    dispatch(getCart(token));
     return res;
   } catch (err) {
     console.error(err);
@@ -68,11 +71,16 @@ export const loginUser = user => async dispatch => {
       email,
       password,
     });
-    const { firstName, lastName, token } = res.data;
-    localStorage.setItem('JWT', token);
-    dispatch(loggedInUser({ email, firstName, lastName }));
-    dispatch(getCart(token));
-    return { firstName, lastName, email };
+    const { firstName, lastName, token, error } = res.data;
+    if (error) {
+      return { error };
+    } else {
+      localStorage.setItem('JWT', token);
+      dispatch(loggedInUser({ email, firstName, lastName }));
+      dispatch(getCart(token));
+      console.log(res);
+      return { firstName, lastName, email };
+    }
   } catch (err) {
     console.error(err);
   }

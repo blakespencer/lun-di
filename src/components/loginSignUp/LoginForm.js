@@ -26,6 +26,7 @@ class LoginForm extends Component {
       type: 'password',
       hasErrored: false,
     },
+    error: '',
   };
 
   handleChange = evt => {
@@ -46,25 +47,32 @@ class LoginForm extends Component {
     evt.preventDefault();
     const { email, password } = this.state;
     try {
-      await this.props.loginUser({
+      const res = await this.props.loginUser({
         email: email.value,
         password: password.value,
       });
-      this.props.history.goBack();
+      if (!res.error) {
+        this.props.history.goBack();
+      } else {
+        this.setState({
+          error: res.error,
+        });
+      }
     } catch (err) {
       console.error(err);
     }
   };
 
   render() {
-    const names = Object.keys(this.state);
+    const names = Object.keys(this.state).filter(name => name !== 'error');
     // This is checking to see if there are errors
     const isDisabled = isDisabledButton(this.state);
-
+    const { error } = this.state;
     return (
       <div className={styles['form-container']}>
         <div className={styles['form-title']}>Login</div>
         <form onSubmit={this.handleSubmit} className={styles['form']}>
+          {error && <div className={styles['server-error']}>{error}</div>}
           {names.map(name => {
             return (
               <Input

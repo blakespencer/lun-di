@@ -27,10 +27,14 @@ export const validate = (evt, state) => {
 
 export const isDisabledButton = state => {
   const { email, password } = state;
+  const names = Object.keys(state).filter(el => el !== 'error');
+  names.map(el => state.name);
   return (
-    Object.values(state).reduce((accumulator, currentValue) => {
-      return accumulator || currentValue.isError || !currentValue.value;
-    }, false) ||
+    names
+      .map(name => state[name])
+      .reduce((accumulator, currentValue) => {
+        return accumulator || currentValue.isError || !currentValue.value;
+      }, false) ||
     password.value.length < 6 ||
     !/\S+@\S+\.\S+/.test(email.value)
   );

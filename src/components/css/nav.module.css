@@ -96,16 +96,16 @@
 
 #user-popup li:hover {
   background-color: rgba(255, 192, 203, 0.5);
-  color: white;
+  /* color: white; */
   background-color: rgb(255, 192, 203);
   color: rgb(0, 0, 0, 0.5);
   width: 92px;
 }
 
-#user-popup li a:hover {
-  /* color: rgb(255, 192, 203); */
-  color: rgba(255, 255, 255, 1);
-}
+/* #user-popup li a:hover { */
+/* color: rgb(255, 192, 203); */
+/* color: rgba(255, 255, 255, 1); */
+/* } */
 
 #user-popup ul {
   display: flex;

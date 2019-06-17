@@ -8,7 +8,7 @@ export default class ImageTitle extends Component {
       <div
         className={styles['image-container']}
         style={{
-          backgroundImage: `url(${require('../images/example_pic.jpg')})`,
+          backgroundImage: `url(${require('../images/new-in-image.jpg')})`,
         }}
       >
         <span className={styles['image-text']}>{text}</span>

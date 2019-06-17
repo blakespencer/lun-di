@@ -115,7 +115,6 @@ export default (state = defaultCart, action) => {
     case INC_ITEM:
       return updateHelper(state, action);
     case DELETE_ITEM:
-      console.log(deleteHelper(state, action));
       return deleteHelper(state, action);
     default:
       return state;

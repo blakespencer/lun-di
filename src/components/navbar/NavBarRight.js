@@ -105,7 +105,9 @@ class NavBarRight extends Component {
             <li className={`${styles['nav-li']}`} id={styles['nav-cart']}>
               <i className="fas fa-shopping-cart" />
               {!!cartCount && (
-                <div className={styles['cart-count']}>{cartCount}</div>
+                <div className={styles['cart-count']}>
+                  <div>{cartCount}</div>
+                </div>
               )}
               <CartPopup countCart={this.countCart} />
             </li>

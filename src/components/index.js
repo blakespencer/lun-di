@@ -18,3 +18,8 @@ export { default as LoginSignUpPage } from './loginSignUp/LoginSignUpPage';
 export { default as SignUpForm } from './loginSignUp/SignUpForm';
 export { default as LoginForm } from './loginSignUp/LoginForm';
 export { default as Input } from './loginSignUp/Input';
+export { default as ProductPage } from './product/ProductPage';
+export { default as ProductSlider } from './product/ProductSlider';
+export {
+  default as ProductQuantityInput,
+} from './product/ProductQuantityInput';

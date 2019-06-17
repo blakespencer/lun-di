@@ -6,12 +6,14 @@ import user from './user';
 import products from './products';
 import cart from './cart';
 import isDisplayCartPopup from './isDisplayCartPopup';
+import product from './product';
 
 import catagories from './catagories';
 
 const reducer = combineReducers({
   user,
   products,
+  product,
   catagories,
   cart,
   isDisplayCartPopup,

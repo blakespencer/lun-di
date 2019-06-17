@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ProductsView, LoginSignUpPage } from './components';
+import { ProductsView, LoginSignUpPage, ProductPage } from './components';
 import { me } from './store/user';
 import { getCatagories } from './store/catagories';
 class Routes extends Component {
@@ -24,7 +24,7 @@ class Routes extends Component {
             isLoggedIn ? <Redirect to="/" /> : <LoginSignUpPage />
           }
         />
-        }
+        <Route path="/product/:id" component={ProductPage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

@@ -79,7 +79,7 @@
   padding: 1rem;
   background-color: #364652;
   -webkit-transition: background-color 0.25s ease-out;
-  transition: background-color 0.25s ease-out;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
 }
 
 .btn:hover {
@@ -89,4 +89,13 @@
 
 .btn:focus {
   outline: none;
+}
+
+.popup-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 14px 0px;
+  font-size: 1.5em;
+  border-top: solid 1px rgba(0, 0, 0, 0.1);
 }

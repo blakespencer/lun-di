@@ -37,7 +37,7 @@ class CartPopup extends Component {
     const { isDisplayCartPopup } = this.props;
     const total = cart.reduce((acc, curr) => {
       return acc + curr.product.price * curr.quantity;
-    }, 1);
+    }, 0);
     return (
       <span
         className={stylesNav['cart-popup']}
@@ -49,7 +49,7 @@ class CartPopup extends Component {
           <div className={styles['popup-container']}>
             <h3>Your Bag Summary</h3>
             {isEmpty ? (
-              <div>You're bag is empty</div>
+              <div>Your bag is empty</div>
             ) : (
               <>
                 <div className={styles['cart-item-container']}>
@@ -58,7 +58,10 @@ class CartPopup extends Component {
                   })}
                 </div>
                 <div>
-                  <div>{`Subtotal: $${total}`}</div>
+                  <div className={styles['popup-price']}>
+                    <div>Subtotal</div>
+                    <div>{`$${total}`}</div>
+                  </div>
                   <button type="submit" className={styles['btn']}>
                     Checkout
                   </button>

@@ -8,7 +8,7 @@ export default class ProductProfile extends Component {
     const { name, brand, price, id } = this.props;
     const brandName = brand.name.replace(/-/g, ' ');
     return (
-      <NavLink to="/" className={styles['a']}>
+      <NavLink to={`/product/${id}`} className={styles['a']}>
         <div className={styles['product-item']}>
           <ImageHover name={name} id={id} />
           <div className={styles['text']}>

@@ -5,6 +5,8 @@ router.use('/catagories', require('./catagories'));
 
 router.use('/products', require('./products'));
 
+router.use('/product', require('./product'));
+
 router.use('/productTypes', require('./productType'));
 
 router.use('/users', require('./users'));

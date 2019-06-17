@@ -118,13 +118,17 @@
 }
 
 .selected {
-  background-color: rgba(255, 192, 203, 0.5);
-  color: white;
+  /* background-color: rgba(255, 192, 203, 0.5);
+  color: white; */
+  background-color: rgb(255, 192, 203);
+  color: rgb(0, 0, 0, 0.5);
 }
 
 .select option.selected:hover {
-  background-color: rgba(255, 192, 203, 0.5);
-  color: white;
+  /* background-color: rgba(255, 192, 203, 0.5);
+  color: white; */
+  background-color: rgb(255, 192, 203);
+  color: rgb(0, 0, 0, 0.5);
 }
 
 @media (max-width: 767px) {

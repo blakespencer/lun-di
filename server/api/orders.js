@@ -96,7 +96,7 @@ router.put('/cart', userPolicy, async (req, res, next) => {
         model: Product,
         attributes: ['id', 'price', 'name', 'description', 'picture'],
       },
-      attributes: ['quantity', 'productId'],
+      attributes: ['quantity', 'productId', 'orderId'],
     });
     // When createed, attributes are not accepted as a parameter...
     if (isCreated) {
@@ -109,7 +109,7 @@ router.put('/cart', userPolicy, async (req, res, next) => {
           model: Product,
           attributes: ['id', 'price', 'name', 'description', 'picture'],
         },
-        attributes: ['quantity', 'productId'],
+        attributes: ['quantity', 'productId', 'orderId'],
       });
     }
     item.quantity = quantity;

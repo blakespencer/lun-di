@@ -39,7 +39,12 @@ export default class ProductSlider extends Component {
         >
           {imagePaths.map((img, idx) => {
             return (
-              <img className={styles['img']} src={imagePaths[idx]} alt="" />
+              <img
+                className={styles['img']}
+                src={imagePaths[idx]}
+                alt=""
+                key={img + idx}
+              />
             );
           })}
         </div>

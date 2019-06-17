@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import styles from '../css/product-page.module.css';
 import { connect } from 'react-redux';
 import { getProduct, removeProduct } from '../../store/product';
-import { ProductSlider } from '../';
+import { ProductSlider, ProductQuantityInput } from '../';
 import { updateCart } from '../../store/cart';
 
 class ProductPage extends Component {
@@ -38,12 +38,20 @@ class ProductPage extends Component {
     this.props.updateCart(id, quantity);
   };
 
+  handleQuantityClick = addition => {
+    const quantity = addition + this.state.quantity;
+    if (quantity >= 1) {
+      this.setState({
+        quantity,
+      });
+    }
+  };
+
   render() {
     const { product } = this.props;
-    console.log(product);
     const { name, description, price, brand } = product;
     const brandName = brand && brand.name;
-
+    const { quantity } = this.state;
     return (
       <div id={styles['content']}>
         <div className={styles['product-page']}>
@@ -53,7 +61,10 @@ class ProductPage extends Component {
             <div>{`Product Page ${name}`}</div>
             <div>{`$ ${price}`}</div>
             <div>{`${description}`}</div>
-
+            <ProductQuantityInput
+              quantity={quantity}
+              handleClick={this.handleQuantityClick}
+            />
             <button className={styles['btn']} onClick={this.handleAddBag}>
               Add To Bag
             </button>

@@ -1,4 +1,6 @@
-const jwtSecret = process.env.JWT_SECRET || require('../../secrets').JWT_SECRET;
+const jwtSecret =
+  process.env.REACT_APP_JWT_SECRET ||
+  require('../../secrets').REACT_APP_JWT_SECRET;
 const bcrypt = require('bcrypt');
 
 const BCRYPT_SALT_ROUNDS = 12;

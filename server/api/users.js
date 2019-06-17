@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { User } = require('../db/models');
 const passport = require('passport');
-const { JWT_SECRET } = process.env.JWT_SECRET || require('../../secrets');
+const REACT_APP_JWT_SECRET =
+  process.env.REACT_APP_JWT_SECRET ||
+  require('../../secrets').REACT_APP_JWT_SECRET;
 const jwt = require('jsonwebtoken');
 const { isAdmin, adminPolicy } = require('../config/authenticateMiddleware');
 
@@ -54,7 +56,7 @@ router.post('/loginUser', (req, res, next) => {
             },
           });
           const { firstName, lastName } = userRes;
-          const token = jwt.sign({ id: email }, JWT_SECRET);
+          const token = jwt.sign({ id: email }, REACT_APP_JWT_SECRET);
           res.status(200).send({
             auth: true,
             token: token,

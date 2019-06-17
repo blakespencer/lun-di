@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../db/models');
 const passport = require('passport');
-const { JWT_SECRET } = require('../../secrets');
+const { JWT_SECRET } = process.env.JWT_SECRET || require('../../secrets');
 const jwt = require('jsonwebtoken');
 const { isAdmin, adminPolicy } = require('../config/authenticateMiddleware');
 

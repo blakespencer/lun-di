@@ -75,7 +75,6 @@ router.delete('/cart/item/', userPolicy, async (req, res, next) => {
       attributes: ['id'],
     });
     const orderId = cart.id;
-    console.log(orderId);
     const item = await Item.findOne({
       where: {
         orderId,

@@ -25,6 +25,7 @@ router.get('/:ProductTypeName', async (req, res, next) => {
           model: Sku,
         },
       ],
+      order: [[Sku, 'valueSequence', 'ASC']],
     });
     res.json(products);
   } catch (err) {

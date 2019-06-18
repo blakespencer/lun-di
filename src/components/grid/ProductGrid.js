@@ -24,6 +24,7 @@ class ProductGrid extends Component {
 
   render() {
     const { products } = this.props;
+    console.log(products);
     return (
       <div className={styles['grid-container']}>
         <MediaQuery minWidth={768}>

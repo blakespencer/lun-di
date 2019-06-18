@@ -1,8 +1,10 @@
 .header {
   position: fixed;
-  width: 100vw;
+  width: 100%;
   z-index: 10;
   top: 0;
+  max-width: 1400px;
+  text-align: center;
 }
 
 .a {

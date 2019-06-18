@@ -23,3 +23,8 @@ code {
 .solid-header {
   background-color: rgba(255, 255, 255, 1);
 }
+
+.App {
+  max-width: 1400px;
+  margin: 0 auto;
+}

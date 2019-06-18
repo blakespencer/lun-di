@@ -5,12 +5,12 @@ import { NavLink } from 'react-router-dom';
 
 export default class ProductProfile extends Component {
   render() {
-    const { name, brand, price, id } = this.props;
+    const { name, brand, price, id, skus } = this.props;
     const brandName = brand.name.replace(/-/g, ' ');
     return (
       <NavLink to={`/product/${id}`} className={styles['a']}>
         <div className={styles['product-item']}>
-          <ImageHover name={name} id={id} />
+          <ImageHover name={name} id={id} skus={skus} />
           <div className={styles['text']}>
             <div className={styles['text-brand']}>{brandName}</div>
             <div className={styles['text-info']}>{name}</div>

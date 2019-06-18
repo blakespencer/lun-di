@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { displayCartPopup } from './isDisplayCartPopup';
+import product from './product';
 
 // ACTION TYPES
 
@@ -31,12 +32,12 @@ export const getCart = accessString => async dispatch => {
   }
 };
 
-export const updateCart = (productId, quantity) => async dispatch => {
+export const updateCart = (productId, skuId, quantity) => async dispatch => {
   try {
     const accessString = localStorage.getItem('JWT');
     const res = await axios.put(
       '/api/orders/cart',
-      { productId, quantity },
+      { productId, skuId, quantity },
       {
         headers: { Authorization: `JWT ${accessString}` },
       }
@@ -48,12 +49,12 @@ export const updateCart = (productId, quantity) => async dispatch => {
   }
 };
 
-export const incItem = (productId, addition) => async dispatch => {
+export const incItem = (productId, skuId, addition) => async dispatch => {
   try {
     const accessString = localStorage.getItem('JWT');
     const res = await axios.put(
       '/api/orders/cart/inc',
-      { productId, addition },
+      { productId, skuId, addition },
       {
         headers: { Authorization: `JWT ${accessString}` },
       }
@@ -82,7 +83,7 @@ const updateHelper = (state, action) => {
   const newState = [];
   let isNew = true;
   state.forEach(el => {
-    if (el.productId === action.payload.productId) {
+    if (el.skuID === action.payload.skuId) {
       newState.push(action.payload);
       isNew = false;
     } else {

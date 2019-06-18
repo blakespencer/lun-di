@@ -25,7 +25,12 @@ class CartPopup extends Component {
       'product-profile_quick-add-text'
     );
     const { isDisplayCartPopup, hideCartPopup } = this.props;
-    if (!this.node.contains(evt.target) && isDisplayCartPopup && isAddQuick) {
+    if (
+      this.node &&
+      !this.node.contains(evt.target) &&
+      isDisplayCartPopup &&
+      isAddQuick
+    ) {
       hideCartPopup();
     }
   };

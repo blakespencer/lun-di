@@ -4,13 +4,13 @@ import { updateCart } from '../../store/cart';
 import { connect } from 'react-redux';
 
 class ImageHover extends Component {
-  handleClick = (evt, id) => {
+  handleClick = (evt, productId, skuId) => {
     evt.preventDefault();
-    this.props.updateCart(id, 1);
+    this.props.updateCart(productId, skuId, 1);
   };
 
   render() {
-    const { name, id } = this.props;
+    const { name, id, skus } = this.props;
     return (
       <div
         className={styles['image-container']}
@@ -25,9 +25,20 @@ class ImageHover extends Component {
           </div>
           <div
             className={`${styles['quick-add-bar-alt']}`}
-            onClick={evt => this.handleClick(evt, id)}
+            // onClick={evt => this.handleClick(evt, id)}
           >
-            <div className={styles['quick-add-text']}>extra small etc</div>
+            <div className={styles['quick-add-text']}>
+              {skus.map(size => {
+                return (
+                  <div
+                    className={styles['quick-add-size']}
+                    onClick={evt => this.handleClick(evt, id, size.id)}
+                  >
+                    <div>{size.value}</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -36,8 +47,8 @@ class ImageHover extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateCart: (productId, quantity) =>
-    dispatch(updateCart(productId, quantity)),
+  updateCart: (productId, skuId, quantity) =>
+    dispatch(updateCart(productId, skuId, quantity)),
 });
 
 export default connect(

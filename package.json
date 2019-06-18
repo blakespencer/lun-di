@@ -36,7 +36,8 @@
     "heroku-postbuild": "npm run buildcustom && node server/db/seed.js",
     "buildcustom": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "seed": "node server/db/seed.js"
   },
   "eslintConfig": {
     "extends": "react-app"

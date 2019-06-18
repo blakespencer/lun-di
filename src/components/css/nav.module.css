@@ -98,24 +98,21 @@
 
 #user-popup li:hover {
   background-color: rgba(255, 192, 203, 0.5);
-  /* color: white; */
   background-color: rgb(255, 192, 203);
   color: rgb(0, 0, 0, 0.5);
-  width: 92px;
 }
-
-/* #user-popup li a:hover { */
-/* color: rgb(255, 192, 203); */
-/* color: rgba(255, 255, 255, 1); */
-/* } */
 
 #user-popup ul {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 #user-popup ul li {
   padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: start;
 }
 
 .nav-hover {
@@ -128,7 +125,7 @@
   position: absolute;
   width: 0;
   height: 2px;
-  background-color: black;
+  background-color: pink;
   bottom: 0;
   left: 0;
   transition: width 0.3s ease 0.3s;

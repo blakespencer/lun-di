@@ -1,17 +1,30 @@
 const db = require('./index');
 
-const { Product, ProductType, Catagory, Brand } = require('./models');
+const { Product, ProductType, Catagory, Brand, Sku } = require('./models');
 
 // Rows for tables
 const products = [];
 
-for (let i = 0; i < 1600; i++) {
+const skus = [];
+
+for (let i = 1; i < 1601; i++) {
   products.push({
     name: `Shoes ${i}`,
     description: 'These are really nice shoes',
     picture: './images/example_pic.jpg',
     price: Math.floor(Math.random() * 100 + 1),
   });
+  const sizes = ['xs', 's', 'm', 'l'];
+  for (let j = 0; j < 4; j++) {
+    skus.push({
+      name: `size`,
+      price: Math.floor(Math.random() * 100 + 1),
+      stock: Math.floor(Math.random() * 10 + 1),
+      description: `Shoes ${i} size-${sizes[j]}`,
+      value: sizes[j],
+      valueSequence: j + 1,
+    });
+  }
 }
 
 const fourth = 400;
@@ -73,6 +86,10 @@ const seedScript = async () => {
     console.log('db synced');
     // Creating the rows
 
+    const createdSkus = await Sku.bulkCreate(skus, {
+      returning: true,
+    });
+
     const createdBrands = await Brand.bulkCreate(brands, {
       returning: true,
     });
@@ -128,6 +145,17 @@ const seedScript = async () => {
     };
 
     // catagories and prodcutTypes
+    const promiseAssociation = [];
+    createdProducts.forEach(async (product, idx) => {
+      for (let i = 0; i < 4; i++) {
+        promiseAssociation.push(
+          createdSkus[idx * 4 + i]['setProduct'](product)
+        );
+      }
+    });
+
+    await Promise.all(promiseAssociation);
+
     await createAssociations(createdProducts, createdBrands, 'setBrand');
 
     await createAssociations(
@@ -177,25 +205,6 @@ const seedScript = async () => {
       createdProductTypesCollection,
       'setProductType'
     );
-
-    // const settingCategoryProductType = [];
-    // for (let i = 0; i < productTypes.length; i++) {
-    //   settingCategoryProductType.push(
-    //     createdProductTypes[i].setCatagory(catagories[0])
-    //   );
-    // }
-    // const settingProductType = [];
-    // let procudtTypeNum = 0;
-    // for (let i = 0; i < createdProducts.length; i++) {
-    //   settingProductType.push(
-    //     createdProducts[i].setProductType(createdProductTypes[procudtTypeNum])
-    //   );
-    //   procudtTypeNum += 1;
-    //   if (procudtTypeNum === createdProductTypes.length) {
-    //     procudtTypeNum = 0;
-    //   }
-    // }
-    // await Promise.all(settingProductType);
   } catch (error) {
     console.log(error);
   } finally {

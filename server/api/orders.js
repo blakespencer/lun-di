@@ -79,7 +79,7 @@ router.delete('/cart/item/', userPolicy, async (req, res, next) => {
 
 router.put('/cart', userPolicy, async (req, res, next) => {
   try {
-    const { productId, quantity } = req.body;
+    const { productId, skuId, quantity } = req.body;
     // Make sure they can access only their cart
     const cart = await Order.findOne({
       where: { userId: req.user.id, status: 'cart' },
@@ -91,6 +91,7 @@ router.put('/cart', userPolicy, async (req, res, next) => {
       where: {
         orderId,
         productId,
+        skuId,
       },
       include: {
         model: Product,
@@ -105,6 +106,7 @@ router.put('/cart', userPolicy, async (req, res, next) => {
         where: {
           orderId,
           productId,
+          skuId,
         },
         include: {
           model: Product,

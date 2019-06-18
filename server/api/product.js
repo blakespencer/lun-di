@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, ProductType, Catagory, Brand } = require('../db/models');
+const { Product, ProductType, Catagory, Brand, Sku } = require('../db/models');
 module.exports = router;
 
 router.get('/:id', async (req, res, next) => {
@@ -9,10 +9,16 @@ router.get('/:id', async (req, res, next) => {
       where: {
         id: id,
       },
-      include: {
-        model: Brand,
-      },
+      include: [
+        {
+          model: Brand,
+        },
+        {
+          model: Sku,
+        },
+      ],
       attributes: ['name', 'description', 'picture', 'price'],
+      order: [[Sku, 'valueSequence', 'ASC']],
     });
     res.json(product);
   } catch (err) {

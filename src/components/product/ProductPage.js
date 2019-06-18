@@ -3,12 +3,15 @@ import { withRouter } from 'react-router-dom';
 import styles from '../css/product-page.module.css';
 import { connect } from 'react-redux';
 import { getProduct, removeProduct } from '../../store/product';
-import { ProductSlider, ProductQuantityInput } from '../';
+import { ProductSlider, ProductQuantityInput, ProductSize } from '../';
 import { updateCart } from '../../store/cart';
+import _ from 'lodash';
 
 class ProductPage extends Component {
   state = {
     quantity: 1,
+    size: 'Select Size',
+    valueSequence: 1,
   };
 
   componentDidMount() {
@@ -19,6 +22,12 @@ class ProductPage extends Component {
 
   componentWillUnmount() {
     this.props.removeProduct();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      !_.isEqual(nextProps, this.props) || !_.isEqual(nextState, this.state)
+    );
   }
 
   handleClick = (length, isLeft) => {
@@ -34,8 +43,8 @@ class ProductPage extends Component {
 
   handleAddBag = () => {
     const { id } = this.props.match.params;
-    const { quantity } = this.state;
-    this.props.updateCart(id, quantity);
+    const { quantity, skuId } = this.state;
+    this.props.updateCart(id, skuId, quantity);
   };
 
   handleQuantityClick = addition => {
@@ -47,11 +56,15 @@ class ProductPage extends Component {
     }
   };
 
+  handleChange = (skuId, size) => {
+    this.setState({ size: size, skuId: skuId });
+  };
+
   render() {
     const { product } = this.props;
     const { name, description, price, brand } = product;
     const brandName = brand && brand.name;
-    const { quantity } = this.state;
+    const { quantity, size } = this.state;
     return (
       <div id={styles['content']}>
         <div className={styles['product-page']}>
@@ -61,11 +74,22 @@ class ProductPage extends Component {
             <div>{`Product Page ${name}`}</div>
             <div>{`$ ${price}`}</div>
             <div>{`${description}`}</div>
-            <ProductQuantityInput
-              quantity={quantity}
-              handleClick={this.handleQuantityClick}
-            />
-            <button className={styles['btn']} onClick={this.handleAddBag}>
+            <div className={styles['inputs-container']}>
+              <ProductSize
+                handleChange={this.handleChange}
+                product={product}
+                size={size}
+              />
+              <ProductQuantityInput
+                quantity={quantity}
+                handleClick={this.handleQuantityClick}
+              />
+            </div>
+            <button
+              className={styles['btn']}
+              onClick={this.handleAddBag}
+              disabled={size === 'Select Size'}
+            >
               Add To Bag
             </button>
           </div>
@@ -82,8 +106,8 @@ const mapStateToProps = ({ product }) => ({
 const mapDispatchToProps = dispatch => ({
   getProduct: productId => dispatch(getProduct(productId)),
   removeProduct: () => dispatch(removeProduct()),
-  updateCart: (productId, quantity) =>
-    dispatch(updateCart(productId, quantity)),
+  updateCart: (productId, skuId, quantity) =>
+    dispatch(updateCart(productId, skuId, quantity)),
 });
 
 export default withRouter(

@@ -23,3 +23,4 @@ export { default as ProductSlider } from './product/ProductSlider';
 export {
   default as ProductQuantityInput,
 } from './product/ProductQuantityInput';
+export { default as ProductSize } from './product/ProductSize';

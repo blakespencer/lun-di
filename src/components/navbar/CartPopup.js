@@ -18,6 +18,7 @@ class CartPopup extends Component {
     if (nextProps.isDisplayCartPopup) {
       document.addEventListener('click', this.handleOutsideClick, false);
     }
+    this.props.countCart(this.props.cart);
   }
 
   handleOutsideClick = evt => {
@@ -35,7 +36,6 @@ class CartPopup extends Component {
 
   render() {
     const { cart } = this.props;
-    console.log(cart);
     this.props.countCart(cart);
     const isEmpty = !cart.length;
     const { isDisplayCartPopup } = this.props;

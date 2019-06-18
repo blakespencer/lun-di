@@ -21,9 +21,7 @@ class CartPopup extends Component {
   }
 
   handleOutsideClick = evt => {
-    const isAddQuick = !evt.target.className.includes(
-      'product-profile_quick-add-text'
-    );
+    const isAddQuick = !evt.target.className.includes('profile_quick-add-size');
     const { isDisplayCartPopup, hideCartPopup } = this.props;
     if (
       this.node &&
@@ -37,6 +35,7 @@ class CartPopup extends Component {
 
   render() {
     const { cart } = this.props;
+    console.log(cart);
     this.props.countCart(cart);
     const isEmpty = !cart.length;
     const { isDisplayCartPopup } = this.props;
@@ -59,7 +58,12 @@ class CartPopup extends Component {
               <>
                 <div className={styles['cart-item-container']}>
                   {cart.map(item => {
-                    return <CartItemProfile item={item} key={item.productId} />;
+                    return (
+                      <CartItemProfile
+                        item={item}
+                        key={`cart-item${item.productId}-${item.skuId}`}
+                      />
+                    );
                   })}
                 </div>
                 <div>

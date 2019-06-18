@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 class ImageHover extends Component {
   handleClick = (evt, productId, skuId) => {
     evt.preventDefault();
-    this.props.updateCart(productId, skuId, 1);
+    if (productId) {
+      this.props.updateCart(productId, skuId, 1);
+    }
   };
 
   render() {
@@ -27,14 +29,18 @@ class ImageHover extends Component {
             className={`${styles['quick-add-bar-alt']}`}
             // onClick={evt => this.handleClick(evt, id)}
           >
-            <div className={styles['quick-add-text']}>
-              {skus.map(size => {
+            <div
+              className={styles['quick-add-text']}
+              onClick={this.handleClick}
+            >
+              {skus.map((size, idx) => {
                 return (
                   <div
                     className={styles['quick-add-size']}
                     onClick={evt => this.handleClick(evt, id, size.id)}
+                    key={`size-${idx}-${id}-${size.id}`}
                   >
-                    <div>{size.value}</div>
+                    <div className={styles['not-clickable']}>{size.value}</div>
                   </div>
                 );
               })}

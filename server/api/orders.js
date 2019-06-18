@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order, Item, Product } = require('../db/models');
+const { Order, Item, Product, Sku } = require('../db/models');
 const { userPolicy } = require('../config/authenticateMiddleware');
 module.exports = router;
 
@@ -9,11 +9,16 @@ router.get('/cart', userPolicy, async (req, res, next) => {
       where: { userId: req.user.id, status: 'cart' },
       include: {
         model: Item,
-        attributes: ['quantity', 'productId'],
-        include: {
-          model: Product,
-          attributes: ['id', 'price', 'name', 'description', 'picture'],
-        },
+        attributes: ['quantity', 'productId', 'skuId'],
+        include: [
+          {
+            model: Product,
+            attributes: ['id', 'price', 'name', 'description', 'picture'],
+          },
+          {
+            model: Sku,
+          },
+        ],
       },
     });
 
@@ -29,7 +34,7 @@ router.get('/cart', userPolicy, async (req, res, next) => {
 // NOT SURE THE BEST RESTFUL API NAME...
 router.put('/cart/inc', userPolicy, async (req, res, next) => {
   try {
-    const { productId, addition } = req.body;
+    const { productId, skuId, addition } = req.body;
     // Make sure they can access only their cart
     const cart = await Order.findOne({
       where: { userId: req.user.id, status: 'cart' },
@@ -40,12 +45,18 @@ router.put('/cart/inc', userPolicy, async (req, res, next) => {
       where: {
         orderId,
         productId,
+        skuId,
       },
-      include: {
-        model: Product,
-        attributes: ['id', 'price', 'name', 'description', 'picture'],
-      },
-      attributes: ['quantity', 'productId', 'orderId'],
+      include: [
+        {
+          model: Product,
+          attributes: ['id', 'price', 'name', 'description', 'picture'],
+        },
+        {
+          model: Sku,
+        },
+      ],
+      attributes: ['quantity', 'productId', 'orderId', 'skuId'],
     });
     item.quantity += addition;
     await item.save();
@@ -57,21 +68,23 @@ router.put('/cart/inc', userPolicy, async (req, res, next) => {
 
 router.delete('/cart/item/', userPolicy, async (req, res, next) => {
   try {
-    const { productId } = req.query;
+    const { productId, skuId } = req.query;
     // Make sure they can access only their cart
     const cart = await Order.findOne({
       where: { userId: req.user.id, status: 'cart' },
       attributes: ['id'],
     });
     const orderId = cart.id;
+    console.log(orderId);
     const item = await Item.findOne({
       where: {
         orderId,
         productId,
+        skuId,
       },
     });
     await item.destroy({ force: true });
-    res.json({ productId });
+    res.json({ productId, skuId });
   } catch (err) {
     console.log(err);
   }
@@ -93,11 +106,16 @@ router.put('/cart', userPolicy, async (req, res, next) => {
         productId,
         skuId,
       },
-      include: {
-        model: Product,
-        attributes: ['id', 'price', 'name', 'description', 'picture'],
-      },
-      attributes: ['quantity', 'productId', 'orderId'],
+      include: [
+        {
+          model: Product,
+          attributes: ['id', 'price', 'name', 'description', 'picture'],
+        },
+        {
+          model: Sku,
+        },
+      ],
+      attributes: ['quantity', 'productId', 'orderId', 'skuId'],
     });
     // When createed, attributes are not accepted as a parameter...
 
@@ -108,11 +126,16 @@ router.put('/cart', userPolicy, async (req, res, next) => {
           productId,
           skuId,
         },
-        include: {
-          model: Product,
-          attributes: ['id', 'price', 'name', 'description', 'picture'],
-        },
-        attributes: ['quantity', 'productId', 'orderId'],
+        include: [
+          {
+            model: Product,
+            attributes: ['id', 'price', 'name', 'description', 'picture'],
+          },
+          {
+            model: Sku,
+          },
+        ],
+        attributes: ['quantity', 'productId', 'orderId', 'skuId'],
       });
     }
     item.quantity = quantity;

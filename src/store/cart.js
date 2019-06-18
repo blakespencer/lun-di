@@ -65,12 +65,12 @@ export const incItem = (productId, skuId, addition) => async dispatch => {
   }
 };
 
-export const deleteItem = productId => async dispatch => {
+export const deleteItem = (productId, skuId) => async dispatch => {
   try {
     const accessString = localStorage.getItem('JWT');
     const res = await axios.delete('/api/orders/cart/item', {
       headers: { Authorization: `JWT ${accessString}` },
-      params: { productId },
+      params: { productId, skuId },
     });
     dispatch(deletedItem(res.data));
     dispatch(displayCartPopup());
@@ -82,8 +82,9 @@ export const deleteItem = productId => async dispatch => {
 const updateHelper = (state, action) => {
   const newState = [];
   let isNew = true;
+  const { productId, skuId } = action.payload;
   state.forEach(el => {
-    if (el.skuID === action.payload.skuId) {
+    if (el.skuId === skuId && el.productId === productId) {
       newState.push(action.payload);
       isNew = false;
     } else {
@@ -98,8 +99,9 @@ const updateHelper = (state, action) => {
 
 const deleteHelper = (state, action) => {
   const newState = [];
+  const { skuId } = action.payload;
   state.forEach(el => {
-    if (el.productId !== +action.payload.productId) {
+    if (el.skuId !== +skuId) {
       newState.push(el);
     }
   });
@@ -107,6 +109,7 @@ const deleteHelper = (state, action) => {
 };
 
 // REDUCER
+
 export default (state = defaultCart, action) => {
   switch (action.type) {
     case GET_CART:

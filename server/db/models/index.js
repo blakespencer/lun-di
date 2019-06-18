@@ -32,6 +32,8 @@ Product.hasMany(Item);
 
 Product.hasMany(Sku);
 Sku.belongsTo(Product);
+Item.belongsTo(Sku);
+Sku.hasMany(Item);
 
 // This is circluar
 

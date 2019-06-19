@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order, Item, Product, Sku } = require('../db/models');
+const { Order, Item, Product, Sku, Color } = require('../db/models');
 const { userPolicy } = require('../config/authenticateMiddleware');
 module.exports = router;
 
@@ -17,6 +17,11 @@ router.get('/cart', userPolicy, async (req, res, next) => {
           },
           {
             model: Sku,
+            include: [
+              {
+                model: Color,
+              },
+            ],
           },
         ],
       },
@@ -54,6 +59,9 @@ router.put('/cart/inc', userPolicy, async (req, res, next) => {
         },
         {
           model: Sku,
+          include: {
+            model: Color,
+          },
         },
       ],
       attributes: ['quantity', 'productId', 'orderId', 'skuId'],

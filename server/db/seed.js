@@ -1,33 +1,56 @@
 const db = require('./index');
 
-const { Product, ProductType, Catagory, Brand, Sku } = require('./models');
+const {
+  Product,
+  ProductType,
+  Catagory,
+  Brand,
+  Sku,
+  Color,
+  Size,
+} = require('./models');
 
 // Rows for tables
 const products = [];
 
 const skus = [];
 
-for (let i = 1; i < 1601; i++) {
+const productAmount = 400;
+
+for (let i = 1; i < productAmount + 1; i++) {
   products.push({
     name: `Shoes ${i}`,
     description: 'These are really nice shoes',
     picture: './images/example_pic.jpg',
     price: Math.floor(Math.random() * 100 + 1),
   });
-  const sizes = ['xs', 's', 'm', 'l'];
   for (let j = 0; j < 4; j++) {
-    skus.push({
-      name: `size`,
-      price: Math.floor(Math.random() * 100 + 1),
-      stock: Math.floor(Math.random() * 10 + 1),
-      description: `Shoes ${i} size-${sizes[j]}`,
-      value: sizes[j],
-      valueSequence: j + 1,
-    });
+    for (let k = 0; k < 4; k++) {
+      skus.push({
+        name: `size`,
+        price: Math.floor(Math.random() * 100 + 1),
+        stock: Math.floor(Math.random() * 10 + 1),
+        description: `Shoes ${i}`,
+      });
+    }
   }
 }
 
-const fourth = 400;
+const fourth = productAmount / 4;
+
+const colors = [
+  { color: 'Red', value: 'rgba(255, 0, 0, 1)' },
+  { color: 'green', value: 'rgba(0, 255, 0, 1)' },
+  { color: 'blue', value: 'rgba(0, 0, 255, 1)' },
+  { color: 'black', value: 'rgba(0, 0, 0, 0)' },
+];
+
+const sizes = [
+  { valueSequence: 1, value: 'xs' },
+  { valueSequence: 2, value: 's' },
+  { valueSequence: 3, value: 'm' },
+  { valueSequence: 4, value: 'l' },
+];
 
 const brands = [
   { name: 'Louis-V' },
@@ -85,6 +108,12 @@ const seedScript = async () => {
     await db.sync({ force: true });
     console.log('db synced');
     // Creating the rows
+
+    const createdSizes = await Size.bulkCreate(sizes, {
+      returning: true,
+    });
+
+    const createdColors = await Color.bulkCreate(colors, { returning: true });
 
     const createdSkus = await Sku.bulkCreate(skus, {
       returning: true,
@@ -144,17 +173,41 @@ const seedScript = async () => {
       await Promise.all(promiseArray);
     };
 
-    // catagories and prodcutTypes
+    // catagories and productTypes
+    console.log('skus length', createdSkus.length);
     const promiseAssociation = [];
     createdProducts.forEach(async (product, idx) => {
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 16; i++) {
         promiseAssociation.push(
-          createdSkus[idx * 4 + i]['setProduct'](product)
+          createdSkus[idx * 16 + i]['setProduct'](product)
         );
       }
     });
 
+    let num = 0;
+    const skuColorAssociation = [];
+    createdSkus.forEach((sku, idx) => {
+      if (idx % 4 === 0) {
+        num += 1;
+      }
+      if (num === 4) {
+        num = 0;
+      }
+      skuColorAssociation.push(
+        createdSkus[idx]['setColor'](createdColors[num])
+      );
+    });
+    const skuSizeAssociation = [];
+    createdSkus.forEach((sku, idx) => {
+      let num = idx % 4;
+      skuSizeAssociation.push(sku['setSize'](createdSizes[num]));
+    });
+
     await Promise.all(promiseAssociation);
+
+    await Promise.all(skuColorAssociation);
+
+    await Promise.all(skuSizeAssociation);
 
     await createAssociations(createdProducts, createdBrands, 'setBrand');
 

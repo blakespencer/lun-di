@@ -6,6 +6,8 @@ const Product = require('./product');
 const ProductType = require('./productType');
 const { User } = require('./user');
 const Sku = require('./sku');
+const Color = require('./color');
+const Size = require('./size');
 
 // associations
 Brand.hasMany(Product);
@@ -34,11 +36,17 @@ Product.hasMany(Sku);
 Sku.belongsTo(Product);
 Item.belongsTo(Sku);
 Sku.hasMany(Item);
+Sku.belongsTo(Color);
+Color.hasMany(Sku);
+Sku.belongsTo(Size);
+Size.hasMany(Sku);
 
 // This is circluar
 
 module.exports = {
   Sku,
+  Size,
+  Color,
   User,
   Item,
   Order,

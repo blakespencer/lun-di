@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order, Item, Product, Sku, Color } = require('../db/models');
+const { Order, Item, Product, Sku, Color, Size } = require('../db/models');
 const { userPolicy } = require('../config/authenticateMiddleware');
 module.exports = router;
 
@@ -13,13 +13,24 @@ router.get('/cart', userPolicy, async (req, res, next) => {
         include: [
           {
             model: Product,
-            attributes: ['id', 'price', 'name', 'description', 'picture'],
+            // include: [
+            //   {
+            //     model: Color,
+            //   },
+            //   {
+            //     model: Size,
+            //   },
+            // ],
+            attributes: ['id', 'price', 'title', 'description', 'picture'],
           },
           {
             model: Sku,
             include: [
               {
                 model: Color,
+              },
+              {
+                model: Size,
               },
             ],
           },
@@ -55,13 +66,18 @@ router.put('/cart/inc', userPolicy, async (req, res, next) => {
       include: [
         {
           model: Product,
-          attributes: ['id', 'price', 'name', 'description', 'picture'],
+          attributes: ['id', 'price', 'title', 'description', 'picture'],
         },
         {
           model: Sku,
-          include: {
-            model: Color,
-          },
+          include: [
+            {
+              model: Color,
+            },
+            {
+              model: Size,
+            },
+          ],
         },
       ],
       attributes: ['quantity', 'productId', 'orderId', 'skuId'],
@@ -116,10 +132,18 @@ router.put('/cart', userPolicy, async (req, res, next) => {
       include: [
         {
           model: Product,
-          attributes: ['id', 'price', 'name', 'description', 'picture'],
+          attributes: ['id', 'price', 'title', 'description', 'picture'],
         },
         {
           model: Sku,
+          include: [
+            {
+              model: Color,
+            },
+            {
+              model: Size,
+            },
+          ],
         },
       ],
       attributes: ['quantity', 'productId', 'orderId', 'skuId'],
@@ -136,10 +160,18 @@ router.put('/cart', userPolicy, async (req, res, next) => {
         include: [
           {
             model: Product,
-            attributes: ['id', 'price', 'name', 'description', 'picture'],
+            attributes: ['id', 'price', 'title', 'description', 'picture'],
           },
           {
             model: Sku,
+            include: [
+              {
+                model: Color,
+              },
+              {
+                model: Size,
+              },
+            ],
           },
         ],
         attributes: ['quantity', 'productId', 'orderId', 'skuId'],

@@ -16,8 +16,15 @@ router.get('/:id', async (req, res, next) => {
         {
           model: Sku,
         },
+        {
+          model: Product,
+          as: 'Sisters',
+          include: {
+            model: Sku,
+          },
+        },
       ],
-      attributes: ['name', 'description', 'picture', 'price'],
+      attributes: ['title', 'description', 'picture', 'price'],
       order: [[Sku, 'valueSequence', 'ASC']],
     });
     res.json(product);

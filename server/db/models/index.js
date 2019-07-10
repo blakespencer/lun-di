@@ -41,6 +41,23 @@ Color.hasMany(Sku);
 Sku.belongsTo(Size);
 Size.hasMany(Sku);
 
+// Product.belongsToMany(Color, { through: Sku });
+// Color.belongsToMany(Product, { through: Sku });
+// Size.belongsToMany(Product, { through: Sku });
+// Product.belongsToMany(Size, { through: Sku });
+
+Product.hasMany(Product, {
+  as: 'Sisters',
+  foreignKey: 'ParentId',
+  useJunctionTable: false,
+});
+
+Product.belongsTo(Product, {
+  as: 'Sister',
+  foreignKey: 'ParentId',
+  useJunctionTable: false,
+});
+
 // This is circluar
 
 module.exports = {

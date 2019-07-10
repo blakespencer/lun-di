@@ -15,28 +15,7 @@ const products = [];
 
 const skus = [];
 
-const productAmount = 400;
-
-for (let i = 1; i < productAmount + 1; i++) {
-  products.push({
-    name: `Shoes ${i}`,
-    description: 'These are really nice shoes',
-    picture: './images/example_pic.jpg',
-    price: Math.floor(Math.random() * 100 + 1),
-  });
-  for (let j = 0; j < 4; j++) {
-    for (let k = 0; k < 4; k++) {
-      skus.push({
-        name: `size`,
-        price: Math.floor(Math.random() * 100 + 1),
-        stock: Math.floor(Math.random() * 10 + 1),
-        description: `Shoes ${i}`,
-      });
-    }
-  }
-}
-
-const fourth = productAmount / 4;
+const productAmount = 800;
 
 const colors = [
   { color: 'Red', value: 'rgba(255, 0, 0, 1)' },
@@ -44,6 +23,34 @@ const colors = [
   { color: 'blue', value: 'rgba(0, 0, 255, 1)' },
   { color: 'black', value: 'rgba(0, 0, 0, 0)' },
 ];
+
+let colorNum = 0;
+let shoeNum = 0;
+for (let i = 1; i < productAmount + 1; i++) {
+  products.push({
+    title: `${colors[colorNum]['color']} - Shoes - ${shoeNum}`,
+    description: 'These are really nice shoes',
+    picture: './images/example_pic.jpg',
+    price: Math.floor(Math.random() * 100 + 1),
+    valueSequence: colorNum,
+    color: colors[colorNum]['value'],
+  });
+  for (let j = 0; j < 4; j++) {
+    skus.push({
+      name: `size`,
+      price: Math.floor(Math.random() * 100 + 1),
+      stock: Math.floor(Math.random() * 10 + 1),
+      description: `Shoes ${shoeNum}`,
+    });
+  }
+  colorNum += 1;
+  if (colorNum === 4) {
+    colorNum = 0;
+    shoeNum += 1;
+  }
+}
+
+const fourth = productAmount / 4;
 
 const sizes = [
   { valueSequence: 1, value: 'xs' },
@@ -177,9 +184,9 @@ const seedScript = async () => {
     console.log('skus length', createdSkus.length);
     const promiseAssociation = [];
     createdProducts.forEach(async (product, idx) => {
-      for (let i = 0; i < 16; i++) {
+      for (let i = 0; i < 4; i++) {
         promiseAssociation.push(
-          createdSkus[idx * 16 + i]['setProduct'](product)
+          createdSkus[idx * 4 + i]['setProduct'](product)
         );
       }
     });
@@ -258,6 +265,20 @@ const seedScript = async () => {
       createdProductTypesCollection,
       'setProductType'
     );
+
+    const allProducts = await Product.findAll({ order: [['id', 'ASC']] });
+    let parent = {};
+
+    const parentPromises = [];
+    for (let i = 0; i < allProducts.length; i++) {
+      let el = allProducts[i];
+      if (el.valueSequence === 0) {
+        parent = el;
+      } else {
+        parentPromises.push(el.setSister(parent));
+      }
+    }
+    await Promise.all(parentPromises);
   } catch (error) {
     console.log(error);
   } finally {

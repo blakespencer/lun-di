@@ -20,6 +20,7 @@ router.get('/test', async (req, res, next) => {
           as: 'Sisters',
           include: {
             model: Sku,
+            include: { model: Size },
           },
         },
         {
@@ -46,9 +47,19 @@ router.get('/:ProductTypeName', async (req, res, next) => {
         {
           model: Product,
           as: 'Sisters',
-          include: {
-            model: Sku,
-          },
+          include: [
+            {
+              model: Sku,
+              include: [
+                {
+                  model: Color,
+                },
+                {
+                  model: Size,
+                },
+              ],
+            },
+          ],
         },
         {
           model: Sku,

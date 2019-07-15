@@ -62,7 +62,8 @@ class ProductPage extends Component {
 
   render() {
     const { product } = this.props;
-    const { name, description, price, brand } = product;
+    const { title, description, price, brand } = product;
+    console.log(product);
     const brandName = brand && brand.name;
     const { quantity, size } = this.state;
     return (
@@ -70,10 +71,12 @@ class ProductPage extends Component {
         <div className={styles['product-page']}>
           <ProductSlider />
           <div className={styles['product-info']}>
-            <div>{brandName}</div>
-            <div>{`Product Page ${name}`}</div>
-            <div>{`$ ${price}`}</div>
-            <div>{`${description}`}</div>
+            <div className={styles['brand-name']}>{brandName}</div>
+            <div className={styles['product-name']}>{`${title}`}</div>
+            <div className={styles['product-price']}>{`$ ${price}`}</div>
+            <div
+              className={styles['product-description']}
+            >{`${description}`}</div>
             <div className={styles['inputs-container']}>
               <ProductSize
                 handleChange={this.handleChange}

@@ -3,7 +3,7 @@ import styles from '../css/product-page.module.css';
 
 export default class ProductSize extends Component {
   state = {
-    isClicked: false,
+    isClicked: true,
   };
 
   componentDidMount() {
@@ -46,20 +46,21 @@ export default class ProductSize extends Component {
           <span className={styles['size-dropdown']}>
             <ul className={styles['select']}>
               {options.map(el => {
-                const { id, value } = el;
+                const { id } = el;
+                const { value } = el.size;
                 return (
                   <li
                     className={`${styles['li']} ${size === el.value &&
                       styles['selected']}`}
                     key={el.value}
                     onClick={() => handleChange(id, value)}
-                    value={el.value}
+                    value={value}
                     id={el.id}
                     name={el.name}
                     data-skuid={el.id}
-                    data-value={el.value}
+                    data-value={value}
                   >
-                    {el.value}
+                    {value}
                   </li>
                 );
               })}

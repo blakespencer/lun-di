@@ -16,7 +16,7 @@ class CartItemProfile extends Component {
   };
 
   render() {
-    const { id, picture, name, description, price } = this.props.item.product;
+    // const { id, picture, name, description, price } = this.props.item.product;
     const { quantity, sku } = this.props.item;
     return (
       <div className={styles['item-profile-container']}>
@@ -26,9 +26,9 @@ class CartItemProfile extends Component {
           className={styles['image']}
         />
         <div className={styles['item-info']}>
-          <div>{sku && sku.description}</div>
+          <div>{sku && `${sku.color.color} ${sku.description}`}</div>
           <div>{`$${sku && sku.price}`}</div>
-          <div>{sku && sku.value}</div>
+          <div>{sku && sku.size.value}</div>
           <div className={styles['item-quantity']}>
             <div
               className={styles['item-quantity-btn']}

@@ -13,6 +13,7 @@ class ImageHover extends Component {
 
   render() {
     const { name, id, skus } = this.props;
+
     return (
       <div
         className={styles['image-container']}
@@ -33,14 +34,16 @@ class ImageHover extends Component {
               className={styles['quick-add-text']}
               onClick={this.handleClick}
             >
-              {skus.map((size, idx) => {
+              {skus.map((sku, idx) => {
                 return (
                   <div
                     className={styles['quick-add-size']}
-                    onClick={evt => this.handleClick(evt, id, size.id)}
-                    key={`size-${idx}-${id}-${size.id}`}
+                    onClick={evt => this.handleClick(evt, id, sku.id)}
+                    key={`size-${idx}-${id}-${sku.id}`}
                   >
-                    <div className={styles['not-clickable']}>{size.value}</div>
+                    <div className={styles['not-clickable']}>
+                      {sku.size.value}
+                    </div>
                   </div>
                 );
               })}

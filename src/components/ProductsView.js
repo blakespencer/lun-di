@@ -6,7 +6,7 @@ class Content extends Component {
   render() {
     return (
       <div id={styles.content}>
-        <ImageTitle text="I Love Ruby" imagePath="../images/new-in-image.jpg" />
+        <ImageTitle text="Title" imagePath="../images/new-in-image.jpg" />
         <ProductGrid />
       </div>
     );

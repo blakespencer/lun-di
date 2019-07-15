@@ -116,3 +116,21 @@
 .not-clickable {
   pointer-events: none;
 }
+
+.color-container {
+  display: flex;
+  flex-direction: row;
+  visibility: hidden;
+}
+
+.product-item:hover .color-container {
+  visibility: visible;
+}
+
+.color-circle {
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #000;
+  margin-right: 5px;
+}

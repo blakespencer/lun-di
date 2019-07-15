@@ -9,13 +9,16 @@
   width: 100%;
   right: 14px;
   max-width: 300px;
-  max-height: calc(100% - 92px);
+  max-height: calc(90vh - 70px);
   font-family: Ubuntu, sans-serif;
   user-select: none;
+  overflow: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-item-container {
-  max-height: 570px;
+  max-height: 500px;
   overflow: scroll;
 }
 
